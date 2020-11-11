@@ -115,39 +115,18 @@ namespace Trivia
 
 		public void WasCorrectlyAnswered(Roll roll)
 		{
-			if (!CurrentPlayer.InPenaltyBox)
+			if (CurrentPlayer.InPenaltyBox && !roll.IsGettingOutOfPenaltyBox)
 			{
-				Console.WriteLine("Answer was corrent!!!!");
-				CurrentPlayer.AddPurse();
-				Console.WriteLine($"{CurrentPlayer} now has {CurrentPlayer.Purses} Gold Coins.");
-
-				bool winner = CurrentPlayer.HasWin();
-
 				NextPlayer();
-
-				if (!winner)
-					DomainEvent.Raise(new PlayerRollRequested(this));
-
 				return;
 			}
 
-			if (roll.IsGettingOutOfPenaltyBox)
-			{
-				Console.WriteLine("Answer was correct!!!!");
+			Console.WriteLine("Answer was correct!!!!");
+			CurrentPlayer.AddPurse();
+			Console.WriteLine($"{CurrentPlayer} now has {CurrentPlayer.Purses} Gold Coins.");
 
+			if (!CurrentPlayer.HasWin())
 				NextPlayer();
-
-				CurrentPlayer.AddPurse();
-				Console.WriteLine($"{CurrentPlayer} now has {CurrentPlayer.Purses} Gold Coins.");
-
-				if (!CurrentPlayer.HasWin())
-					DomainEvent.Raise(new PlayerRollRequested(this));
-
-				return;
-			}
-
-			NextPlayer();
-			DomainEvent.Raise(new PlayerRollRequested(this));
 		}
 
 		private void NextPlayer()
@@ -155,6 +134,8 @@ namespace Trivia
 			CurrentPlayer = Players.IndexOf(CurrentPlayer) == Players.Count - 1
 				? Players.First()
 				: Players[Players.IndexOf(CurrentPlayer) + 1];
+
+			DomainEvent.Raise(new PlayerRollRequested(this));
 		}
 
 		public void WrongAnswer()
@@ -164,7 +145,6 @@ namespace Trivia
 			CurrentPlayer.SetInPenaltyBox();
 
 			NextPlayer();
-			DomainEvent.Raise(new PlayerRollRequested(this));
 		}
 	}
 }
