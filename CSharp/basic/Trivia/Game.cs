@@ -44,7 +44,7 @@ namespace Trivia
 			Players.Add(player);
 			player.ResetGame();
 
-			Console.WriteLine($"{player.Name} was Added");
+			Console.WriteLine($"{player} was Added");
 			Console.WriteLine($"They are player number {Players.Count}");
 
 			CurrentPlayer = Players.First();
@@ -60,13 +60,13 @@ namespace Trivia
 			if (!IsPlayable())
 				return;
 
-			Console.WriteLine($"{CurrentPlayer.Name} is the current player");
-			Console.WriteLine($"They have rolled a {roll.Number}");
+			Console.WriteLine($"{CurrentPlayer} is the current player");
+			Console.WriteLine($"They have rolled a {roll}");
 
 			if (!CurrentPlayer.InPenaltyBox)
 			{
 				CurrentPlayer.Move(roll);
-				Console.WriteLine($"{CurrentPlayer.Name}'s new location is {CurrentPlayer.Places}");
+				Console.WriteLine($"{CurrentPlayer}'s new location is {CurrentPlayer.Places}");
 				Console.WriteLine($"The category is {CurrentCategory()}");
 				AskQuestion();
 				return;
@@ -74,16 +74,16 @@ namespace Trivia
 
 			if (roll.IsGettingOutOfPenaltyBox)
 			{
-				Console.WriteLine($"{CurrentPlayer.Name} is getting out of the penalty box");
+				Console.WriteLine($"{CurrentPlayer} is getting out of the penalty box");
 
 				CurrentPlayer.Move(roll);
-				Console.WriteLine($"{CurrentPlayer.Name}'s new location is {CurrentPlayer.Places}");
+				Console.WriteLine($"{CurrentPlayer}'s new location is {CurrentPlayer.Places}");
 				Console.WriteLine($"The category is {CurrentCategory()}");
 				AskQuestion();
 			}
 			else
 			{
-				Console.WriteLine($"{CurrentPlayer.Name} is not getting out of the penalty box");
+				Console.WriteLine($"{CurrentPlayer} is not getting out of the penalty box");
 			}
 		}
 
@@ -130,7 +130,7 @@ namespace Trivia
 			{
 				Console.WriteLine("Answer was corrent!!!!");
 				CurrentPlayer.AddPurse();
-				Console.WriteLine($"{CurrentPlayer.Name} now has {CurrentPlayer.Purses} Gold Coins.");
+				Console.WriteLine($"{CurrentPlayer} now has {CurrentPlayer.Purses} Gold Coins.");
 
 				bool winner = DidPlayerWin();
 
@@ -146,7 +146,7 @@ namespace Trivia
 				NextPlayer();
 
 				CurrentPlayer.AddPurse();
-				Console.WriteLine($"{CurrentPlayer.Name} now has {CurrentPlayer.Purses} Gold Coins.");
+				Console.WriteLine($"{CurrentPlayer} now has {CurrentPlayer.Purses} Gold Coins.");
 
 				return DidPlayerWin();
 			}
@@ -165,7 +165,7 @@ namespace Trivia
 		public bool WrongAnswer()
 		{
 			Console.WriteLine("Question was incorrectly answered");
-			Console.WriteLine($"{CurrentPlayer.Name} was sent to the penalty box");
+			Console.WriteLine($"{CurrentPlayer} was sent to the penalty box");
 			CurrentPlayer.SetInPenaltyBox();
 
 			NextPlayer();
