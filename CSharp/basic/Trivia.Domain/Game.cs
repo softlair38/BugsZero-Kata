@@ -58,28 +58,21 @@ namespace Trivia
 			Console.WriteLine($"{CurrentPlayer} is the current player");
 			Console.WriteLine($"They have rolled a {roll}");
 
-			if (!CurrentPlayer.InPenaltyBox)
-			{
-				CurrentPlayer.Move(roll);
-				Console.WriteLine($"{CurrentPlayer}'s new location is {CurrentPlayer.Places}");
-				Console.WriteLine($"The category is {CurrentCategory()}");
-				AskQuestion();
-				return;
-			}
+			if (CurrentPlayer.InPenaltyBox)
+				if (roll.IsGettingOutOfPenaltyBox)
+				{
+					Console.WriteLine($"{CurrentPlayer} is getting out of the penalty box");
+				}
+				else
+				{
+					Console.WriteLine($"{CurrentPlayer} is not getting out of the penalty box");
+					return;
+				}
 
-			if (roll.IsGettingOutOfPenaltyBox)
-			{
-				Console.WriteLine($"{CurrentPlayer} is getting out of the penalty box");
-
-				CurrentPlayer.Move(roll);
-				Console.WriteLine($"{CurrentPlayer}'s new location is {CurrentPlayer.Places}");
-				Console.WriteLine($"The category is {CurrentCategory()}");
-				AskQuestion();
-			}
-			else
-			{
-				Console.WriteLine($"{CurrentPlayer} is not getting out of the penalty box");
-			}
+			CurrentPlayer.Move(roll);
+			Console.WriteLine($"{CurrentPlayer}'s new location is {CurrentPlayer.Places}");
+			Console.WriteLine($"The category is {CurrentCategory()}");
+			AskQuestion();
 		}
 
 		private void AskQuestion()
