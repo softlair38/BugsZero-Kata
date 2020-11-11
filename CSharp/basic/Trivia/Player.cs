@@ -4,9 +4,39 @@
 	{
 		public string Name { get; }
 
+		public int Places { get; private set; }
+		public int Purses { get; private set; }
+
+		public bool InPenaltyBox { get; private set; }
+
 		public Player(string name)
 		{
 			Name = name;
+		}
+
+		public void ResetGame()
+		{
+			Places = 0;
+			Purses = 0;
+			InPenaltyBox = false;
+		}
+
+		public void Move(int roll)
+		{
+			Places += roll;
+
+			if (Places > 11)
+				Places -= 12;
+		}
+
+		public void AddPurse()
+		{
+			Purses++;
+		}
+
+		public void SetInPenaltyBox()
+		{
+			InPenaltyBox = true;
 		}
 	}
 }
