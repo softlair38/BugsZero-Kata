@@ -35,11 +35,14 @@ namespace Trivia
 
 		public bool IsPlayable()
 		{
-			return HowManyPlayers() >= 2 && HowManyPlayers() <= MaxPlayers;
+			return HowManyPlayers() >= 2;
 		}
 
 		public void Add(Player player)
 		{
+			if (HowManyPlayers() == MaxPlayers)
+				return;
+
 			Players.Add(player);
 			player.ResetGame();
 
@@ -56,6 +59,9 @@ namespace Trivia
 
 		public void Roll(int roll)
 		{
+			if (!IsPlayable())
+				return;
+
 			Console.WriteLine($"{CurrentPlayer.Name} is the current player");
 			Console.WriteLine($"They have rolled a {roll}");
 
