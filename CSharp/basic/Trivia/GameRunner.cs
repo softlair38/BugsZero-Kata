@@ -1,4 +1,5 @@
 ﻿using System;
+using Trivia.Domain.Events;
 
 namespace Trivia
 {
@@ -6,24 +7,35 @@ namespace Trivia
 	{
 		private static readonly Random Rand = new Random(new Guid("1BEFC143-CBA2-4F3D-9219-F2220F792D28").GetHashCode());
 
-		private static bool _notAWinner;
-
 		public static void Main(string[] args)
 		{
-			Game aGame = new Game(new Player("Chet"), new Player("Pat"), new Player("Sue"));
+			DomainEvent.OnDomainEventTriggered += OnDomainEventTriggered;
 
-			Random rand = Rand;
+			var game = new Game(new Player("Chet"), new Player("Pat"), new Player("Sue"));
+			RunOnce(game);
 
-			do
+			DomainEvent.OnDomainEventTriggered -= OnDomainEventTriggered;
+		}
+
+		private static void RunOnce(Game game)
+		{
+			var roll = new Roll(Rand.Next(5) + 1);
+			game.Roll(roll);
+
+			if (Rand.Next(9) == 7)
+				game.WrongAnswer();
+			else
+				game.WasCorrectlyAnswered(roll);
+		}
+
+		private static void OnDomainEventTriggered(IDomainEvent domainEvent)
+		{
+			switch (domainEvent)
 			{
-				var roll = new Roll(rand.Next(5) + 1);
-				aGame.Roll(roll);
-
-				_notAWinner = rand.Next(9) == 7
-					? aGame.WrongAnswer()
-					: aGame.WasCorrectlyAnswered(roll);
-
-			} while (_notAWinner);
+				case PlayerRollRequested playerRollRequested:
+					RunOnce(playerRollRequested.Game);
+					break;
+			}
 		}
 	}
 }

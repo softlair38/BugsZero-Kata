@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Trivia.Domain.Events;
 
 namespace Trivia
 {
@@ -112,7 +113,7 @@ namespace Trivia
 			}
 		}
 
-		public bool WasCorrectlyAnswered(Roll roll)
+		public void WasCorrectlyAnswered(Roll roll)
 		{
 			if (!CurrentPlayer.InPenaltyBox)
 			{
@@ -124,7 +125,10 @@ namespace Trivia
 
 				NextPlayer();
 
-				return !winner;
+				if (!winner)
+					DomainEvent.Raise(new PlayerRollRequested(this));
+
+				return;
 			}
 
 			if (roll.IsGettingOutOfPenaltyBox)
@@ -136,11 +140,14 @@ namespace Trivia
 				CurrentPlayer.AddPurse();
 				Console.WriteLine($"{CurrentPlayer} now has {CurrentPlayer.Purses} Gold Coins.");
 
-				return !CurrentPlayer.HasWin();
+				if (!CurrentPlayer.HasWin())
+					DomainEvent.Raise(new PlayerRollRequested(this));
+
+				return;
 			}
 
 			NextPlayer();
-			return !CurrentPlayer.HasWin();
+			DomainEvent.Raise(new PlayerRollRequested(this));
 		}
 
 		private void NextPlayer()
@@ -150,14 +157,14 @@ namespace Trivia
 				: Players[Players.IndexOf(CurrentPlayer) + 1];
 		}
 
-		public bool WrongAnswer()
+		public void WrongAnswer()
 		{
 			Console.WriteLine("Question was incorrectly answered");
 			Console.WriteLine($"{CurrentPlayer} was sent to the penalty box");
 			CurrentPlayer.SetInPenaltyBox();
 
 			NextPlayer();
-			return !CurrentPlayer.HasWin();
+			DomainEvent.Raise(new PlayerRollRequested(this));
 		}
 	}
 }
