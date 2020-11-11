@@ -7,10 +7,12 @@ namespace Trivia
 	{
 		private List<string> Players { get; } = new List<string>();
 
-		private int[] Places { get; } = new int[6];
-		private int[] Purses { get; } = new int[6];
+		private const byte MaxPlayers = 6;
 
-		private bool[] InPenaltyBox { get; } = new bool[6];
+		private int[] Places { get; } = new int[MaxPlayers];
+		private int[] Purses { get; } = new int[MaxPlayers];
+
+		private bool[] InPenaltyBox { get; } = new bool[MaxPlayers];
 
 		private static Dictionary<Category, Queue<string>> DicoQuestions { get; } = new Dictionary<Category, Queue<string>>();
 
@@ -37,7 +39,7 @@ namespace Trivia
 
 		public bool IsPlayable()
 		{
-			return HowManyPlayers() >= 2;
+			return HowManyPlayers() >= 2 && HowManyPlayers() <= MaxPlayers;
 		}
 
 		public void Add(string playerName)
