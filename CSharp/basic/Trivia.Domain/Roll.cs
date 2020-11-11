@@ -1,6 +1,6 @@
 ﻿namespace Trivia
 {
-	public struct Roll
+	public readonly struct Roll
 	{
 		internal int Number { get; }
 

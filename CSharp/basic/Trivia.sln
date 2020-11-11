@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trivia", "Trivia\Trivia.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trivia.Tests", "Trivia.Tests\Trivia.Tests.csproj", "{2D8F8BB5-FDC3-4DB8-AF6F-8E3C900B2F5C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trivia.Domain", "Trivia.Domain\Trivia.Domain.csproj", "{94C1763D-205E-4404-A09F-DDC0FEFC84B0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{2D8F8BB5-FDC3-4DB8-AF6F-8E3C900B2F5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D8F8BB5-FDC3-4DB8-AF6F-8E3C900B2F5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D8F8BB5-FDC3-4DB8-AF6F-8E3C900B2F5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94C1763D-205E-4404-A09F-DDC0FEFC84B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94C1763D-205E-4404-A09F-DDC0FEFC84B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94C1763D-205E-4404-A09F-DDC0FEFC84B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94C1763D-205E-4404-A09F-DDC0FEFC84B0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

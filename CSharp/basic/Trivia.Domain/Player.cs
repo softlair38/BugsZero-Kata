@@ -2,26 +2,26 @@
 {
 	public class Player
 	{
-		public string Name { get; }
+		internal string Name { get; }
 
-		public int Places { get; private set; }
-		public int Purses { get; private set; }
+		internal int Places { get; private set; }
+		internal int Purses { get; private set; }
 
-		public bool InPenaltyBox { get; private set; }
+		internal bool InPenaltyBox { get; private set; }
 
 		public Player(string name)
 		{
 			Name = name;
 		}
 
-		public void ResetGame()
+		internal void ResetGame()
 		{
 			Places = 0;
 			Purses = 0;
 			InPenaltyBox = false;
 		}
 
-		public void Move(Roll roll)
+		internal void Move(Roll roll)
 		{
 			Places += roll.Number;
 
@@ -29,17 +29,17 @@
 				Places -= Game.NbPlaces;
 		}
 
-		public void AddPurse()
+		internal void AddPurse()
 		{
 			Purses++;
 		}
 
-		public void SetInPenaltyBox()
+		internal void SetInPenaltyBox()
 		{
 			InPenaltyBox = true;
 		}
 
-		public bool HasWin()
+		internal bool HasWin()
 		{
 			return Purses == Game.NbPurseToWin;
 		}
