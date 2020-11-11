@@ -20,11 +20,12 @@ namespace Trivia
 
 			do
 			{
-				aGame.Roll(rand.Next(5) + 1);
+				var roll = new Roll(rand.Next(5) + 1);
+				aGame.Roll(roll);
 
 				_notAWinner = rand.Next(9) == 7
 					? aGame.WrongAnswer()
-					: aGame.WasCorrectlyAnswered();
+					: aGame.WasCorrectlyAnswered(roll);
 
 			} while (_notAWinner);
 		}

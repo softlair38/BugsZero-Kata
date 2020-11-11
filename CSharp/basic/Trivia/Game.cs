@@ -14,8 +14,6 @@ namespace Trivia
 
 		private Player CurrentPlayer { get; set; }
 
-		private bool IsGettingOutOfPenaltyBox { get; set; }
-
 		public Game()
 		{
 			DicoQuestions.Clear();
@@ -57,13 +55,13 @@ namespace Trivia
 			return Players.Count;
 		}
 
-		public void Roll(int roll)
+		public void Roll(Roll roll)
 		{
 			if (!IsPlayable())
 				return;
 
 			Console.WriteLine($"{CurrentPlayer.Name} is the current player");
-			Console.WriteLine($"They have rolled a {roll}");
+			Console.WriteLine($"They have rolled a {roll.Number}");
 
 			if (!CurrentPlayer.InPenaltyBox)
 			{
@@ -74,9 +72,8 @@ namespace Trivia
 				return;
 			}
 
-			if (roll % 2 != 0)
+			if (roll.IsGettingOutOfPenaltyBox)
 			{
-				IsGettingOutOfPenaltyBox = true;
 				Console.WriteLine($"{CurrentPlayer.Name} is getting out of the penalty box");
 
 				CurrentPlayer.Move(roll);
@@ -87,7 +84,6 @@ namespace Trivia
 			else
 			{
 				Console.WriteLine($"{CurrentPlayer.Name} is not getting out of the penalty box");
-				IsGettingOutOfPenaltyBox = false;
 			}
 		}
 
@@ -128,7 +124,7 @@ namespace Trivia
 			}
 		}
 
-		public bool WasCorrectlyAnswered()
+		public bool WasCorrectlyAnswered(Roll roll)
 		{
 			if (!CurrentPlayer.InPenaltyBox)
 			{
@@ -143,7 +139,7 @@ namespace Trivia
 				return winner;
 			}
 
-			if (IsGettingOutOfPenaltyBox)
+			if (roll.IsGettingOutOfPenaltyBox)
 			{
 				Console.WriteLine("Answer was correct!!!!");
 

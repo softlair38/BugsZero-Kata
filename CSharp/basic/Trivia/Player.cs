@@ -21,9 +21,9 @@
 			InPenaltyBox = false;
 		}
 
-		public void Move(int roll)
+		public void Move(Roll roll)
 		{
-			Places += roll;
+			Places += roll.Number;
 
 			if (Places > 11)
 				Places -= 12;

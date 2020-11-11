@@ -20,40 +20,42 @@ namespace Trivia
 			aGame.Add(new Player("Pat"));
 			aGame.Add(new Player("Sue"));
 
-			aGame.Roll(1);
-			aGame.Roll(1);
-			aGame.Roll(1);
-			aGame.Roll(1);
-			aGame.Roll(1);
-			aGame.Roll(1);
-			aGame.Roll(1);
-			aGame.Roll(1);
-			aGame.Roll(1);
-			aGame.Roll(1);
-			aGame.Roll(1);
-			aGame.Roll(1);
-			aGame.Roll(1);
-			aGame.Roll(1);
+			var roll1 = new Roll(1);
+			aGame.Roll(roll1);
+			aGame.Roll(roll1);
+			aGame.Roll(roll1);
+			aGame.Roll(roll1);
+			aGame.Roll(roll1);
+			aGame.Roll(roll1);
+			aGame.Roll(roll1);
+			aGame.Roll(roll1);
+			aGame.Roll(roll1);
+			aGame.Roll(roll1);
+			aGame.Roll(roll1);
+			aGame.Roll(roll1);
+			aGame.Roll(roll1);
+			aGame.Roll(roll1);
 
-			aGame.WasCorrectlyAnswered();
+			aGame.WasCorrectlyAnswered(roll1);
 			aGame.WrongAnswer();
 
-			aGame.Roll(2);
+			var roll2 = new Roll(2);
+			aGame.Roll(roll2);
 
-			aGame.Roll(6);
-
-			aGame.WrongAnswer();
-
-			aGame.Roll(2);
-
-			aGame.Roll(2);
-
+			aGame.Roll(new Roll(6));
 
 			aGame.WrongAnswer();
 
-			aGame.WasCorrectlyAnswered();
-			aGame.Roll(1);
-			aGame.WasCorrectlyAnswered();
+			aGame.Roll(roll2);
+
+			aGame.Roll(roll2);
+
+
+			aGame.WrongAnswer();
+
+			aGame.WasCorrectlyAnswered(roll2);
+			aGame.Roll(roll1);
+			aGame.WasCorrectlyAnswered(roll1);
 
 			var configuration = BuildConfiguration();
 			this.Assent(output.ToString(), configuration);
