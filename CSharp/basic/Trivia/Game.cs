@@ -6,16 +6,27 @@ namespace Trivia
 {
 	public class Game
 	{
-		private List<Player> Players { get; } = new List<Player>();
+		private List<Player> Players { get; }
 
+		private const byte MinPlayers = 2;
 		private const byte MaxPlayers = 6;
 
 		private static Dictionary<Category, Queue<string>> DicoQuestions { get; } = new Dictionary<Category, Queue<string>>();
 
 		private Player CurrentPlayer { get; set; }
 
-		public Game()
+		public Game(params Player[] players)
 		{
+			if (players == null || players.Length < MinPlayers || players.Length > MaxPlayers)
+				throw new InvalidOperationException($"Le nombre de joueur doit être compris entre {MinPlayers} et {MaxPlayers}");
+
+			Players = new List<Player>();
+			foreach (Player player in players)
+			{
+				Add(player);
+			}
+			CurrentPlayer = Players.First();
+
 			DicoQuestions.Clear();
 			DicoQuestions.Add(Category.Pop, new Queue<string>());
 			DicoQuestions.Add(Category.Science, new Queue<string>());
@@ -31,35 +42,17 @@ namespace Trivia
 			}
 		}
 
-		public bool IsPlayable()
+		private void Add(Player player)
 		{
-			return HowManyPlayers() >= 2;
-		}
-
-		public void Add(Player player)
-		{
-			if (HowManyPlayers() == MaxPlayers)
-				return;
-
 			Players.Add(player);
 			player.ResetGame();
 
 			Console.WriteLine($"{player} was Added");
 			Console.WriteLine($"They are player number {Players.Count}");
-
-			CurrentPlayer = Players.First();
-		}
-
-		private int HowManyPlayers()
-		{
-			return Players.Count;
 		}
 
 		public void Roll(Roll roll)
 		{
-			if (!IsPlayable())
-				return;
-
 			Console.WriteLine($"{CurrentPlayer} is the current player");
 			Console.WriteLine($"They have rolled a {roll}");
 

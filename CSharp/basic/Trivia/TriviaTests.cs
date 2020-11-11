@@ -14,11 +14,8 @@ namespace Trivia
 			var output = new StringBuilder();
 			Console.SetOut(new StringWriter(output));
 
-			Game aGame = new Game();
-			Console.WriteLine(aGame.IsPlayable());
-			aGame.Add(new Player("Chet"));
-			aGame.Add(new Player("Pat"));
-			aGame.Add(new Player("Sue"));
+			Console.WriteLine(false); // test à revoir
+			Game aGame = new Game(new Player("Chet"), new Player("Pat"), new Player("Sue"));
 
 			var roll1 = new Roll(1);
 			aGame.Roll(roll1);
