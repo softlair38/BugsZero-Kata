@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Trivia
 {
@@ -13,10 +12,10 @@ namespace Trivia
 
 		private bool[] InPenaltyBox { get; } = new bool[6];
 
-		private LinkedList<string> PopQuestions { get; } = new LinkedList<string>();
-		private LinkedList<string> ScienceQuestions { get; } = new LinkedList<string>();
-		private LinkedList<string> SportsQuestions { get; } = new LinkedList<string>();
-		private LinkedList<string> RockQuestions { get; } = new LinkedList<string>();
+		private Queue<string> PopQuestions { get; } = new Queue<string>();
+		private Queue<string> ScienceQuestions { get; } = new Queue<string>();
+		private Queue<string> SportsQuestions { get; } = new Queue<string>();
+		private Queue<string> RockQuestions { get; } = new Queue<string>();
 
 		private int CurrentPlayer { get; set; }
 
@@ -26,10 +25,10 @@ namespace Trivia
 		{
 			for (int i = 0; i < 50; i++)
 			{
-				PopQuestions.AddLast($"Pop Question {i}");
-				ScienceQuestions.AddLast($"Science Question {i}");
-				SportsQuestions.AddLast($"Sports Question {i}");
-				RockQuestions.AddLast(CreateRockQuestion(i));
+				PopQuestions.Enqueue($"Pop Question {i}");
+				ScienceQuestions.Enqueue($"Science Question {i}");
+				SportsQuestions.Enqueue($"Sports Question {i}");
+				RockQuestions.Enqueue(CreateRockQuestion(i));
 			}
 		}
 
@@ -103,23 +102,19 @@ namespace Trivia
 			switch (CurrentCategory())
 			{
 				case "Pop":
-					Console.WriteLine(PopQuestions.First());
-					PopQuestions.RemoveFirst();
+					Console.WriteLine(PopQuestions.Dequeue());
 					break;
 
 				case "Science":
-					Console.WriteLine(ScienceQuestions.First());
-					ScienceQuestions.RemoveFirst();
+					Console.WriteLine(ScienceQuestions.Dequeue());
 					break;
 
 				case "Sports":
-					Console.WriteLine(SportsQuestions.First());
-					SportsQuestions.RemoveFirst();
+					Console.WriteLine(SportsQuestions.Dequeue());
 					break;
 
 				case "Rock":
-					Console.WriteLine(RockQuestions.First());
-					RockQuestions.RemoveFirst();
+					Console.WriteLine(RockQuestions.Dequeue());
 					break;
 			}
 		}
