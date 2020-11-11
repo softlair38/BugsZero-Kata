@@ -39,6 +39,11 @@
 			InPenaltyBox = true;
 		}
 
+		public bool HasWin(int nbPurseToWin)
+		{
+			return Purses == nbPurseToWin;
+		}
+
 		public override string ToString()
 		{
 			return Name;

@@ -10,6 +10,7 @@ namespace Trivia
 
 		private const byte MinPlayers = 2;
 		private const byte MaxPlayers = 6;
+		private const byte NbPurseToWin = 6;
 
 		private static Dictionary<Category, Queue<string>> DicoQuestions { get; } = new Dictionary<Category, Queue<string>>();
 
@@ -125,11 +126,11 @@ namespace Trivia
 				CurrentPlayer.AddPurse();
 				Console.WriteLine($"{CurrentPlayer} now has {CurrentPlayer.Purses} Gold Coins.");
 
-				bool winner = DidPlayerWin();
+				bool winner = CurrentPlayer.HasWin(NbPurseToWin);
 
 				NextPlayer();
 
-				return winner;
+				return !winner;
 			}
 
 			if (roll.IsGettingOutOfPenaltyBox)
@@ -141,11 +142,11 @@ namespace Trivia
 				CurrentPlayer.AddPurse();
 				Console.WriteLine($"{CurrentPlayer} now has {CurrentPlayer.Purses} Gold Coins.");
 
-				return DidPlayerWin();
+				return !CurrentPlayer.HasWin(NbPurseToWin);
 			}
 
 			NextPlayer();
-			return true;
+			return !CurrentPlayer.HasWin(NbPurseToWin);
 		}
 
 		private void NextPlayer()
@@ -162,12 +163,7 @@ namespace Trivia
 			CurrentPlayer.SetInPenaltyBox();
 
 			NextPlayer();
-			return true;
-		}
-
-		private bool DidPlayerWin()
-		{
-			return CurrentPlayer.Purses != 6;
+			return !CurrentPlayer.HasWin(NbPurseToWin);
 		}
 	}
 }
