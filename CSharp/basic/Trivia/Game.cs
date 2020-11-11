@@ -5,7 +5,7 @@ namespace Trivia
 {
 	public class Game
 	{
-		private List<string> Players { get; } = new List<string>();
+		private List<Player> Players { get; } = new List<Player>();
 
 		private const byte MaxPlayers = 6;
 
@@ -42,14 +42,14 @@ namespace Trivia
 			return HowManyPlayers() >= 2 && HowManyPlayers() <= MaxPlayers;
 		}
 
-		public void Add(string playerName)
+		public void Add(Player player)
 		{
-			Players.Add(playerName);
+			Players.Add(player);
 			Places[HowManyPlayers()] = 0;
 			Purses[HowManyPlayers()] = 0;
 			InPenaltyBox[HowManyPlayers()] = false;
 
-			Console.WriteLine($"{playerName} was Added");
+			Console.WriteLine($"{player.Name} was Added");
 			Console.WriteLine($"They are player number {Players.Count}");
 		}
 
@@ -60,7 +60,7 @@ namespace Trivia
 
 		public void Roll(int roll)
 		{
-			Console.WriteLine($"{Players[CurrentPlayer]} is the current player");
+			Console.WriteLine($"{Players[CurrentPlayer].Name} is the current player");
 			Console.WriteLine($"They have rolled a {roll}");
 
 			if (!InPenaltyBox[CurrentPlayer])
@@ -70,7 +70,7 @@ namespace Trivia
 				if (Places[CurrentPlayer] > 11)
 					Places[CurrentPlayer] = Places[CurrentPlayer] - 12;
 
-				Console.WriteLine($"{Players[CurrentPlayer]}'s new location is {Places[CurrentPlayer]}");
+				Console.WriteLine($"{Players[CurrentPlayer].Name}'s new location is {Places[CurrentPlayer]}");
 				Console.WriteLine($"The category is {CurrentCategory()}");
 				AskQuestion();
 				return;
@@ -80,19 +80,19 @@ namespace Trivia
 			{
 				IsGettingOutOfPenaltyBox = true;
 
-				Console.WriteLine($"{Players[CurrentPlayer]} is getting out of the penalty box");
+				Console.WriteLine($"{Players[CurrentPlayer].Name} is getting out of the penalty box");
 				Places[CurrentPlayer] = Places[CurrentPlayer] + roll;
 
 				if (Places[CurrentPlayer] > 11)
 					Places[CurrentPlayer] = Places[CurrentPlayer] - 12;
 
-				Console.WriteLine($"{Players[CurrentPlayer]}'s new location is {Places[CurrentPlayer]}");
+				Console.WriteLine($"{Players[CurrentPlayer].Name}'s new location is {Places[CurrentPlayer]}");
 				Console.WriteLine($"The category is {CurrentCategory()}");
 				AskQuestion();
 			}
 			else
 			{
-				Console.WriteLine($"{Players[CurrentPlayer]} is not getting out of the penalty box");
+				Console.WriteLine($"{Players[CurrentPlayer].Name} is not getting out of the penalty box");
 				IsGettingOutOfPenaltyBox = false;
 			}
 		}
@@ -140,7 +140,7 @@ namespace Trivia
 			{
 				Console.WriteLine("Answer was corrent!!!!");
 				Purses[CurrentPlayer]++;
-				Console.WriteLine($"{Players[CurrentPlayer]} now has {Purses[CurrentPlayer]} Gold Coins.");
+				Console.WriteLine($"{Players[CurrentPlayer].Name} now has {Purses[CurrentPlayer]} Gold Coins.");
 
 				bool winner = DidPlayerWin();
 				CurrentPlayer++;
@@ -160,7 +160,7 @@ namespace Trivia
 					CurrentPlayer = 0;
 
 				Purses[CurrentPlayer]++;
-				Console.WriteLine($"{Players[CurrentPlayer]} now has {Purses[CurrentPlayer]} Gold Coins.");
+				Console.WriteLine($"{Players[CurrentPlayer].Name} now has {Purses[CurrentPlayer]} Gold Coins.");
 
 				return DidPlayerWin();
 			}
@@ -176,7 +176,7 @@ namespace Trivia
 		public bool WrongAnswer()
 		{
 			Console.WriteLine("Question was incorrectly answered");
-			Console.WriteLine($"{Players[CurrentPlayer]} was sent to the penalty box");
+			Console.WriteLine($"{Players[CurrentPlayer].Name} was sent to the penalty box");
 			InPenaltyBox[CurrentPlayer] = true;
 
 			CurrentPlayer++;
