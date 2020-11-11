@@ -2,13 +2,13 @@
 
 namespace Trivia
 {
-	public class GameRunner
+	public static class GameRunner
 	{
 		private static readonly Random Rand = new Random(new Guid("1BEFC143-CBA2-4F3D-9219-F2220F792D28").GetHashCode());
 
-		private static bool notAWinner;
+		private static bool _notAWinner;
 
-		public static void Main(String[] args)
+		public static void Main(string[] args)
 		{
 			Game aGame = new Game();
 
@@ -20,25 +20,13 @@ namespace Trivia
 
 			do
 			{
-
 				aGame.Roll(rand.Next(5) + 1);
 
-				if (rand.Next(9) == 7)
-				{
-					notAWinner = aGame.WrongAnswer();
-				}
-				else
-				{
-					notAWinner = aGame.WasCorrectlyAnswered();
-				}
+				_notAWinner = rand.Next(9) == 7
+					? aGame.WrongAnswer()
+					: aGame.WasCorrectlyAnswered();
 
-
-
-			} while (notAWinner);
-
+			} while (_notAWinner);
 		}
-
-
 	}
-
 }
