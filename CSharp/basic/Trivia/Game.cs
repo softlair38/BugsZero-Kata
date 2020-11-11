@@ -12,10 +12,7 @@ namespace Trivia
 
 		private bool[] InPenaltyBox { get; } = new bool[6];
 
-		private Queue<string> PopQuestions { get; } = new Queue<string>();
-		private Queue<string> ScienceQuestions { get; } = new Queue<string>();
-		private Queue<string> SportsQuestions { get; } = new Queue<string>();
-		private Queue<string> RockQuestions { get; } = new Queue<string>();
+		private static Dictionary<Category, Queue<string>> DicoQuestions { get; } = new Dictionary<Category, Queue<string>>();
 
 		private int CurrentPlayer { get; set; }
 
@@ -23,18 +20,19 @@ namespace Trivia
 
 		public Game()
 		{
+			DicoQuestions.Clear();
+			DicoQuestions.Add(Category.Pop, new Queue<string>());
+			DicoQuestions.Add(Category.Science, new Queue<string>());
+			DicoQuestions.Add(Category.Sports, new Queue<string>());
+			DicoQuestions.Add(Category.Rock, new Queue<string>());
+
 			for (int i = 0; i < 50; i++)
 			{
-				PopQuestions.Enqueue($"Pop Question {i}");
-				ScienceQuestions.Enqueue($"Science Question {i}");
-				SportsQuestions.Enqueue($"Sports Question {i}");
-				RockQuestions.Enqueue(CreateRockQuestion(i));
+				DicoQuestions[Category.Pop].Enqueue($"Pop Question {i}");
+				DicoQuestions[Category.Science].Enqueue($"Science Question {i}");
+				DicoQuestions[Category.Sports].Enqueue($"Sports Question {i}");
+				DicoQuestions[Category.Rock].Enqueue($"Rock Question {i}");
 			}
-		}
-
-		private string CreateRockQuestion(int index)
-		{
-			return $"Rock Question {index}";
 		}
 
 		public bool IsPlayable()
@@ -101,45 +99,36 @@ namespace Trivia
 		{
 			switch (CurrentCategory())
 			{
-				case "Pop":
-					Console.WriteLine(PopQuestions.Dequeue());
-					break;
-
-				case "Science":
-					Console.WriteLine(ScienceQuestions.Dequeue());
-					break;
-
-				case "Sports":
-					Console.WriteLine(SportsQuestions.Dequeue());
-					break;
-
-				case "Rock":
-					Console.WriteLine(RockQuestions.Dequeue());
+				case Category.Pop:
+				case Category.Rock:
+				case Category.Science:
+				case Category.Sports:
+					Console.WriteLine(DicoQuestions[CurrentCategory()].Dequeue());
 					break;
 			}
 		}
 
-		private string CurrentCategory()
+		private Category CurrentCategory()
 		{
 			switch (Places[CurrentPlayer])
 			{
 				case 0:
 				case 4:
 				case 8:
-					return "Pop";
+					return Category.Pop;
 
 				case 1:
 				case 5:
 				case 9:
-					return "Science";
+					return Category.Science;
 
 				case 2:
 				case 6:
 				case 10:
-					return "Sports";
+					return Category.Sports;
 
 				default:
-					return "Rock";
+					return Category.Rock;
 			}
 		}
 
