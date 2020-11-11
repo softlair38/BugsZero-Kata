@@ -25,8 +25,8 @@
 		{
 			Places += roll.Number;
 
-			if (Places > 11)
-				Places -= 12;
+			if (Places >= Game.NbPlaces)
+				Places -= Game.NbPlaces;
 		}
 
 		public void AddPurse()
@@ -39,9 +39,9 @@
 			InPenaltyBox = true;
 		}
 
-		public bool HasWin(int nbPurseToWin)
+		public bool HasWin()
 		{
-			return Purses == nbPurseToWin;
+			return Purses == Game.NbPurseToWin;
 		}
 
 		public override string ToString()

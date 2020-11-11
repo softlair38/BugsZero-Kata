@@ -8,9 +8,10 @@ namespace Trivia
 	{
 		private List<Player> Players { get; }
 
-		private const byte MinPlayers = 2;
-		private const byte MaxPlayers = 6;
-		private const byte NbPurseToWin = 6;
+		private const ushort MinPlayers = 2;
+		private const ushort MaxPlayers = 6;
+		internal static ushort NbPurseToWin = 6;
+		internal static ushort NbPlaces = 12;
 
 		private static Dictionary<Category, Queue<string>> DicoQuestions { get; } = new Dictionary<Category, Queue<string>>();
 
@@ -126,7 +127,7 @@ namespace Trivia
 				CurrentPlayer.AddPurse();
 				Console.WriteLine($"{CurrentPlayer} now has {CurrentPlayer.Purses} Gold Coins.");
 
-				bool winner = CurrentPlayer.HasWin(NbPurseToWin);
+				bool winner = CurrentPlayer.HasWin();
 
 				NextPlayer();
 
@@ -142,11 +143,11 @@ namespace Trivia
 				CurrentPlayer.AddPurse();
 				Console.WriteLine($"{CurrentPlayer} now has {CurrentPlayer.Purses} Gold Coins.");
 
-				return !CurrentPlayer.HasWin(NbPurseToWin);
+				return !CurrentPlayer.HasWin();
 			}
 
 			NextPlayer();
-			return !CurrentPlayer.HasWin(NbPurseToWin);
+			return !CurrentPlayer.HasWin();
 		}
 
 		private void NextPlayer()
@@ -163,7 +164,7 @@ namespace Trivia
 			CurrentPlayer.SetInPenaltyBox();
 
 			NextPlayer();
-			return !CurrentPlayer.HasWin(NbPurseToWin);
+			return !CurrentPlayer.HasWin();
 		}
 	}
 }
