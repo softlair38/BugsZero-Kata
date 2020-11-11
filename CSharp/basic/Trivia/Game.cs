@@ -64,29 +64,7 @@ namespace Trivia
 			Console.WriteLine($"{Players[CurrentPlayer]} is the current player");
 			Console.WriteLine($"They have rolled a {roll}");
 
-			if (InPenaltyBox[CurrentPlayer])
-			{
-				if (roll % 2 != 0)
-				{
-					IsGettingOutOfPenaltyBox = true;
-
-					Console.WriteLine($"{Players[CurrentPlayer]} is getting out of the penalty box");
-					Places[CurrentPlayer] = Places[CurrentPlayer] + roll;
-
-					if (Places[CurrentPlayer] > 11)
-						Places[CurrentPlayer] = Places[CurrentPlayer] - 12;
-
-					Console.WriteLine($"{Players[CurrentPlayer]}'s new location is {Places[CurrentPlayer]}");
-					Console.WriteLine($"The category is {CurrentCategory()}");
-					AskQuestion();
-				}
-				else
-				{
-					Console.WriteLine($"{Players[CurrentPlayer]} is not getting out of the penalty box");
-					IsGettingOutOfPenaltyBox = false;
-				}
-			}
-			else
+			if (!InPenaltyBox[CurrentPlayer])
 			{
 				Places[CurrentPlayer] = Places[CurrentPlayer] + roll;
 
@@ -96,6 +74,27 @@ namespace Trivia
 				Console.WriteLine($"{Players[CurrentPlayer]}'s new location is {Places[CurrentPlayer]}");
 				Console.WriteLine($"The category is {CurrentCategory()}");
 				AskQuestion();
+				return;
+			}
+
+			if (roll % 2 != 0)
+			{
+				IsGettingOutOfPenaltyBox = true;
+
+				Console.WriteLine($"{Players[CurrentPlayer]} is getting out of the penalty box");
+				Places[CurrentPlayer] = Places[CurrentPlayer] + roll;
+
+				if (Places[CurrentPlayer] > 11)
+					Places[CurrentPlayer] = Places[CurrentPlayer] - 12;
+
+				Console.WriteLine($"{Players[CurrentPlayer]}'s new location is {Places[CurrentPlayer]}");
+				Console.WriteLine($"The category is {CurrentCategory()}");
+				AskQuestion();
+			}
+			else
+			{
+				Console.WriteLine($"{Players[CurrentPlayer]} is not getting out of the penalty box");
+				IsGettingOutOfPenaltyBox = false;
 			}
 		}
 
@@ -151,32 +150,7 @@ namespace Trivia
 
 		public bool WasCorrectlyAnswered()
 		{
-			if (InPenaltyBox[CurrentPlayer])
-			{
-				if (IsGettingOutOfPenaltyBox)
-				{
-					Console.WriteLine("Answer was correct!!!!");
-					CurrentPlayer++;
-
-					if (CurrentPlayer == Players.Count)
-						CurrentPlayer = 0;
-
-					Purses[CurrentPlayer]++;
-					Console.WriteLine($"{Players[CurrentPlayer]} now has {Purses[CurrentPlayer]} Gold Coins.");
-
-					return DidPlayerWin();
-				}
-				else
-				{
-					CurrentPlayer++;
-
-					if (CurrentPlayer == Players.Count)
-						CurrentPlayer = 0;
-
-					return true;
-				}
-			}
-			else
+			if (!InPenaltyBox[CurrentPlayer])
 			{
 				Console.WriteLine("Answer was corrent!!!!");
 				Purses[CurrentPlayer]++;
@@ -190,6 +164,27 @@ namespace Trivia
 
 				return winner;
 			}
+
+			if (IsGettingOutOfPenaltyBox)
+			{
+				Console.WriteLine("Answer was correct!!!!");
+				CurrentPlayer++;
+
+				if (CurrentPlayer == Players.Count)
+					CurrentPlayer = 0;
+
+				Purses[CurrentPlayer]++;
+				Console.WriteLine($"{Players[CurrentPlayer]} now has {Purses[CurrentPlayer]} Gold Coins.");
+
+				return DidPlayerWin();
+			}
+
+			CurrentPlayer++;
+
+			if (CurrentPlayer == Players.Count)
+				CurrentPlayer = 0;
+
+			return true;
 		}
 
 		public bool WrongAnswer()
