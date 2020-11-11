@@ -2,13 +2,11 @@
 {
 	public struct PlayerResponseRequested : IDomainEvent
 	{
-		internal PlayerResponseRequested(Game game, int randomAnswer)
+		internal PlayerResponseRequested(Game game)
 		{
 			Game = game;
-			RandomAnswer = randomAnswer;
 		}
 
 		public Game Game { get; }
-		public int RandomAnswer { get; }
 	}
 }

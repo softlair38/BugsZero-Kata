@@ -17,7 +17,7 @@ namespace Trivia
 			Console.WriteLine(false); // test à revoir
 			Game aGame = new Game(new Player("Chet"), new Player("Pat"), new Player("Sue"));
 
-			var roll1 = new Roll(1, 2);
+			var roll1 = new Roll(1, true);
 			aGame.Roll(roll1);
 			aGame.Roll(roll1);
 			aGame.Roll(roll1);
@@ -33,26 +33,16 @@ namespace Trivia
 			aGame.Roll(roll1);
 			aGame.Roll(roll1);
 
-			aGame.WasCorrectlyAnswered();
-			aGame.WrongAnswer();
-
-			var roll2 = new Roll(2, 3);
+			var roll2 = new Roll(2, true);
 			aGame.Roll(roll2);
 
-			aGame.Roll(new Roll(6, 7));
-
-			aGame.WrongAnswer();
+			aGame.Roll(new Roll(6, false));
 
 			aGame.Roll(roll2);
 
 			aGame.Roll(roll2);
 
-
-			aGame.WrongAnswer();
-
-			//aGame.WasCorrectlyAnswered();
 			aGame.Roll(roll1);
-			aGame.WasCorrectlyAnswered();
 
 			var configuration = BuildConfiguration();
 			File.WriteAllText("expected.txt", output.ToString());

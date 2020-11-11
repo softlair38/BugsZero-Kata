@@ -75,10 +75,14 @@ namespace Trivia
 			Console.WriteLine($"{CurrentPlayer}'s new location is {CurrentPlayer.Places}");
 			Console.WriteLine($"The category is {CurrentCategory()}");
 
-			AskQuestion(roll.RandomAnswer);
+			AskQuestion();
+			if (roll.GoodAnswer)
+				WrongAnswer();
+			else
+				WasCorrectlyAnswered();
 		}
 
-		private void AskQuestion(int randomAnswer)
+		private void AskQuestion()
 		{
 			switch (CurrentCategory())
 			{
@@ -87,7 +91,7 @@ namespace Trivia
 				case Category.Science:
 				case Category.Sports:
 					Console.WriteLine(DicoQuestions[CurrentCategory()].Dequeue());
-					DomainEvent.Raise(new PlayerResponseRequested(this, randomAnswer));
+					DomainEvent.Raise(new PlayerResponseRequested(this));
 					break;
 			}
 		}
@@ -116,7 +120,7 @@ namespace Trivia
 			}
 		}
 
-		public void WasCorrectlyAnswered()
+		private void WasCorrectlyAnswered()
 		{
 			Console.WriteLine("Answer was correct!!!!");
 			CurrentPlayer.AddPurse();
@@ -135,7 +139,7 @@ namespace Trivia
 			DomainEvent.Raise(new PlayerRollRequested(this));
 		}
 
-		public void WrongAnswer()
+		private void WrongAnswer()
 		{
 			Console.WriteLine("Question was incorrectly answered");
 			Console.WriteLine($"{CurrentPlayer} was sent to the penalty box");
