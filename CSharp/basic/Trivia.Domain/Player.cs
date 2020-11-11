@@ -39,6 +39,11 @@
 			InPenaltyBox = true;
 		}
 
+		internal void SetNotInPenaltyBox()
+		{
+			InPenaltyBox = false;
+		}
+
 		internal bool HasWin()
 		{
 			return Purses == Game.NbPurseToWin;

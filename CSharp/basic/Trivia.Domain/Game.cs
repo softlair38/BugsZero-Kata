@@ -63,6 +63,7 @@ namespace Trivia
 				if (roll.IsGettingOutOfPenaltyBox)
 				{
 					Console.WriteLine($"{CurrentPlayer} is getting out of the penalty box");
+					CurrentPlayer.SetNotInPenaltyBox();
 				}
 				else
 				{
