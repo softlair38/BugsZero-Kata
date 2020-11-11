@@ -103,11 +103,11 @@ The category is Sports
 Sports Question 5
 Question was incorrectly answered
 Chet was sent to the penalty box
-Sue is the current player
+Pat is the current player
 They have rolled a 1
-Sue is getting out of the penalty box
-Sue's new location is 9
+Pat is getting out of the penalty box
+Pat's new location is 1
 The category is Science
 Science Question 4
 Answer was correct!!!!
-Sue now has 1 Gold Coins.
+Pat now has 1 Gold Coins.

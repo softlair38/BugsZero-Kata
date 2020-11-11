@@ -1053,8 +1053,6 @@ Sue now has 2 Gold Coins.
 Chet is the current player
 They have rolled a 2
 Chet is not getting out of the penalty box
-Question was incorrectly answered
-Chet was sent to the penalty box
 Pat is the current player
 They have rolled a 4
 Pat's new location is 9
@@ -1256,8 +1254,6 @@ Pat is not getting out of the penalty box
 Sue is the current player
 They have rolled a 2
 Sue is not getting out of the penalty box
-Question was incorrectly answered
-Sue was sent to the penalty box
 Chet is the current player
 They have rolled a 2
 Chet is not getting out of the penalty box
@@ -1941,8 +1937,6 @@ Pat now has 3 Gold Coins.
 Sue is the current player
 They have rolled a 4
 Sue is not getting out of the penalty box
-Question was incorrectly answered
-Sue was sent to the penalty box
 Chet is the current player
 They have rolled a 3
 Chet is getting out of the penalty box
@@ -2079,8 +2073,6 @@ Sue was sent to the penalty box
 Chet is the current player
 They have rolled a 2
 Chet is not getting out of the penalty box
-Question was incorrectly answered
-Chet was sent to the penalty box
 Pat is the current player
 They have rolled a 3
 Pat's new location is 11
@@ -2099,8 +2091,6 @@ Sue was sent to the penalty box
 Chet is the current player
 They have rolled a 2
 Chet is not getting out of the penalty box
-Question was incorrectly answered
-Chet was sent to the penalty box
 Pat is the current player
 They have rolled a 1
 Pat's new location is 0

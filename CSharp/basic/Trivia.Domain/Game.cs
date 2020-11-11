@@ -67,16 +67,18 @@ namespace Trivia
 				else
 				{
 					Console.WriteLine($"{CurrentPlayer} is not getting out of the penalty box");
+					NextPlayer();
 					return;
 				}
 
 			CurrentPlayer.Move(roll);
 			Console.WriteLine($"{CurrentPlayer}'s new location is {CurrentPlayer.Places}");
 			Console.WriteLine($"The category is {CurrentCategory()}");
-			AskQuestion();
+
+			AskQuestion(roll.RandomAnswer);
 		}
 
-		private void AskQuestion()
+		private void AskQuestion(int randomAnswer)
 		{
 			switch (CurrentCategory())
 			{
@@ -85,6 +87,7 @@ namespace Trivia
 				case Category.Science:
 				case Category.Sports:
 					Console.WriteLine(DicoQuestions[CurrentCategory()].Dequeue());
+					DomainEvent.Raise(new PlayerResponseRequested(this, randomAnswer));
 					break;
 			}
 		}
@@ -113,14 +116,8 @@ namespace Trivia
 			}
 		}
 
-		public void WasCorrectlyAnswered(Roll roll)
+		public void WasCorrectlyAnswered()
 		{
-			if (CurrentPlayer.InPenaltyBox && !roll.IsGettingOutOfPenaltyBox)
-			{
-				NextPlayer();
-				return;
-			}
-
 			Console.WriteLine("Answer was correct!!!!");
 			CurrentPlayer.AddPurse();
 			Console.WriteLine($"{CurrentPlayer} now has {CurrentPlayer.Purses} Gold Coins.");

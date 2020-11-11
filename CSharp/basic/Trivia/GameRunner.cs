@@ -19,13 +19,8 @@ namespace Trivia
 
 		private static void RunOnce(Game game)
 		{
-			var roll = new Roll(Rand.Next(5) + 1);
+			var roll = new Roll(Rand.Next(5) + 1, Rand.Next(9));
 			game.Roll(roll);
-
-			if (Rand.Next(9) == 7)
-				game.WrongAnswer();
-			else
-				game.WasCorrectlyAnswered(roll);
 		}
 
 		private static void OnDomainEventTriggered(IDomainEvent domainEvent)
@@ -34,6 +29,13 @@ namespace Trivia
 			{
 				case PlayerRollRequested playerRollRequested:
 					RunOnce(playerRollRequested.Game);
+					break;
+
+				case PlayerResponseRequested playerResponseRequested:
+					if (playerResponseRequested.RandomAnswer == 7)
+						playerResponseRequested.Game.WrongAnswer();
+					else
+						playerResponseRequested.Game.WasCorrectlyAnswered();
 					break;
 			}
 		}
