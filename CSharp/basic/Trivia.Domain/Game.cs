@@ -20,7 +20,9 @@ namespace Trivia
 
 		public static void StartNewGame(params Player[] players)
 		{
-			Domains.RaiseEvent(new GameStarted(new Game(players)));
+			var game = new Game(players);
+			Domains.RaiseEvent(new GameStarted(game));
+			Domains.RaiseRequest(new PlayerRollRequested(game, game.CurrentPlayer));
 		}
 
 		private Game(params Player[] players)
@@ -48,8 +50,6 @@ namespace Trivia
 				DicoQuestions[Category.Sports].Enqueue($"Sports Question {i}");
 				DicoQuestions[Category.Rock].Enqueue($"Rock Question {i}");
 			}
-
-			Domains.RaiseRequest(new PlayerRollRequested(this, CurrentPlayer));
 		}
 
 		private void Add(Player player)
@@ -109,10 +109,10 @@ namespace Trivia
 			CurrentPlayer.AddPurse();
 			Domains.RaiseEvent(new PlayerGoodResponseSended(this, CurrentPlayer));
 
-			if (!CurrentPlayer.HasWin())
-				NextPlayer();
-			else
+			if (CurrentPlayer.HasWin())
 				Domains.RaiseEvent(new GameEnded(this));
+			else
+				NextPlayer();
 		}
 
 		private void NextPlayer()
