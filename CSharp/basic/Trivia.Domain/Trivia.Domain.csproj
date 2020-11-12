@@ -43,9 +43,16 @@
     <Compile Include="Events\Base\IDomainBase.cs" />
     <Compile Include="Events\Base\IDomainRequest.cs" />
     <Compile Include="Events\Base\IDomainResponse.cs" />
+    <Compile Include="Events\GameEnded.cs" />
+    <Compile Include="Events\GameStarted.cs" />
+    <Compile Include="Events\PlayerBadResponseSended.cs" />
+    <Compile Include="Events\PlayerGoodResponseSended.cs" />
+    <Compile Include="Events\PlayerGoOutOfPenaltyBox.cs" />
     <Compile Include="Events\PlayerResponseRequested.cs" />
     <Compile Include="Events\PlayerResponseResponse.cs" />
     <Compile Include="Events\PlayerRollResponse.cs" />
+    <Compile Include="Events\PlayerStayedInPenaltyBox.cs" />
+    <Compile Include="Events\PlayerWentToPenaltyBox.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Events\Base\IDomainEvent.cs" />
     <Compile Include="Player.cs" />

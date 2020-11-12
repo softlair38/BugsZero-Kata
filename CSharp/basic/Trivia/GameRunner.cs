@@ -11,7 +11,7 @@ namespace Trivia
 		{
 			Domains.OnDomainTriggered += OnDomainTriggered;
 
-			new Game(new Player("Chet"), new Player("Pat"), new Player("Sue"));
+			Game.StartNewGame(new Player("Chet"), new Player("Pat"), new Player("Sue"));
 
 			Domains.OnDomainTriggered -= OnDomainTriggered;
 		}

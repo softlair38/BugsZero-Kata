@@ -18,7 +18,12 @@ namespace Trivia
 
 		private Player CurrentPlayer { get; set; }
 
-		public Game(params Player[] players)
+		public static void StartNewGame(params Player[] players)
+		{
+			Domains.RaiseEvent(new GameStarted(new Game(players)));
+		}
+
+		private Game(params Player[] players)
 		{
 			if (players == null || players.Length < MinPlayers || players.Length > MaxPlayers)
 				throw new InvalidOperationException($"Le nombre de joueur doit être compris entre {MinPlayers} et {MaxPlayers}");
@@ -66,10 +71,12 @@ namespace Trivia
 				{
 					Console.WriteLine($"{CurrentPlayer} is getting out of the penalty box");
 					CurrentPlayer.SetNotInPenaltyBox();
+					Domains.RaiseEvent(new PlayerGoOutOfPenaltyBox(this));
 				}
 				else
 				{
 					Console.WriteLine($"{CurrentPlayer} is not getting out of the penalty box");
+					Domains.RaiseEvent(new PlayerStayedInPenaltyBox(this));
 					NextPlayer();
 					return;
 				}
@@ -124,9 +131,12 @@ namespace Trivia
 			Console.WriteLine("Answer was correct!!!!");
 			CurrentPlayer.AddPurse();
 			Console.WriteLine($"{CurrentPlayer} now has {CurrentPlayer.Purses} Gold Coins.");
+			Domains.RaiseEvent(new PlayerGoodResponseSended(this));
 
 			if (!CurrentPlayer.HasWin())
 				NextPlayer();
+			else
+				Domains.RaiseEvent(new GameEnded(this));
 		}
 
 		private void NextPlayer()
@@ -141,8 +151,10 @@ namespace Trivia
 		internal void WrongAnswer()
 		{
 			Console.WriteLine("Question was incorrectly answered");
+			Domains.RaiseEvent(new PlayerBadResponseSended(this));
 			Console.WriteLine($"{CurrentPlayer} was sent to the penalty box");
 			CurrentPlayer.SetInPenaltyBox();
+			Domains.RaiseEvent(new PlayerWentToPenaltyBox(this));
 
 			NextPlayer();
 		}
