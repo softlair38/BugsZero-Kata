@@ -13,7 +13,7 @@
 
 		public void Response(PlayerRollResponse playerRollResponse)
 		{
-			Game.Roll(playerRollResponse.Roll);
+			Player.Roll(playerRollResponse.Roll);
 		}
 	}
 }

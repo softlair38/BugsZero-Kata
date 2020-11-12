@@ -55,26 +55,12 @@ namespace Trivia
 		private void Add(Player player)
 		{
 			Players.Add(player);
-			player.ResetGame();
+			player.ResetGame(this);
 			Domains.RaiseEvent(new PlayerAddedToGame(this, player, Players.Count));
 		}
 
-		internal void Roll(Roll roll)
+		internal void AskQuestion()
 		{
-			if (CurrentPlayer.InPenaltyBox)
-				if (roll.IsGettingOutOfPenaltyBox)
-				{
-					CurrentPlayer.SetNotInPenaltyBox();
-					Domains.RaiseEvent(new PlayerGoOutOfPenaltyBox(this, CurrentPlayer));
-				}
-				else
-				{
-					Domains.RaiseEvent(new PlayerStayedInPenaltyBox(this, CurrentPlayer));
-					NextPlayer();
-					return;
-				}
-
-			CurrentPlayer.Move(roll);
 			Category category = CurrentCategory(CurrentPlayer.Places);
 			string question = DicoQuestions[category].Dequeue();
 			Domains.RaiseRequest(new PlayerResponseRequested(this, CurrentPlayer, question, category.ToString()));
@@ -104,34 +90,13 @@ namespace Trivia
 			}
 		}
 
-		internal void WasCorrectlyAnswered()
-		{
-			CurrentPlayer.AddPurse();
-			Domains.RaiseEvent(new PlayerGoodResponseSended(this, CurrentPlayer));
-
-			if (CurrentPlayer.HasWin())
-				Domains.RaiseEvent(new GameEnded(this));
-			else
-				NextPlayer();
-		}
-
-		private void NextPlayer()
+		internal void NextPlayer()
 		{
 			CurrentPlayer = Players.IndexOf(CurrentPlayer) == Players.Count - 1
 				? Players.First()
 				: Players[Players.IndexOf(CurrentPlayer) + 1];
 
 			Domains.RaiseRequest(new PlayerRollRequested(this, CurrentPlayer));
-		}
-
-		internal void WrongAnswer()
-		{
-			Domains.RaiseEvent(new PlayerBadResponseSended(this, CurrentPlayer));
-
-			CurrentPlayer.SetInPenaltyBox();
-			Domains.RaiseEvent(new PlayerWentToPenaltyBox(this, CurrentPlayer));
-
-			NextPlayer();
 		}
 	}
 }

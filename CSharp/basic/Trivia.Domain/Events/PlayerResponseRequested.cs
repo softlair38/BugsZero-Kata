@@ -18,9 +18,9 @@
 		public void Response(PlayerResponseResponse playerResponseResponse)
 		{
 			if (playerResponseResponse.Response == 7)
-				Game.WrongAnswer();
+				Player.WrongAnswer();
 			else
-				Game.WasCorrectlyAnswered();
+				Player.WasCorrectlyAnswered();
 		}
 	}
 }
