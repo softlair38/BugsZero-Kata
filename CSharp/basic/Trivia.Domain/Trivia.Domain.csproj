@@ -38,9 +38,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Category.cs" />
-    <Compile Include="Events\Base\DomainEvent.cs" />
-    <Compile Include="Events\Base\DomainEventTrigered.cs" />
+    <Compile Include="Events\Base\Domains.cs" />
+    <Compile Include="Events\Base\DomainTriggered.cs" />
+    <Compile Include="Events\Base\IDomainBase.cs" />
+    <Compile Include="Events\Base\IDomainRequest.cs" />
+    <Compile Include="Events\Base\IDomainResponse.cs" />
     <Compile Include="Events\PlayerResponseRequested.cs" />
+    <Compile Include="Events\PlayerResponseResponse.cs" />
+    <Compile Include="Events\PlayerRollResponse.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Events\Base\IDomainEvent.cs" />
     <Compile Include="Player.cs" />

@@ -92,7 +92,7 @@ namespace Trivia
 				case Category.Science:
 				case Category.Sports:
 					Console.WriteLine(DicoQuestions[CurrentCategory()].Dequeue());
-					DomainEvent.Raise(new PlayerResponseRequested(this));
+					Domains.RaiseRequest(new PlayerResponseRequested(this));
 					break;
 			}
 		}
@@ -137,7 +137,7 @@ namespace Trivia
 				? Players.First()
 				: Players[Players.IndexOf(CurrentPlayer) + 1];
 
-			DomainEvent.Raise(new PlayerRollRequested(this));
+			Domains.RaiseRequest(new PlayerRollRequested(this));
 		}
 
 		private void WrongAnswer()

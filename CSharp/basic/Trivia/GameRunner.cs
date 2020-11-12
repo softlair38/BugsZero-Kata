@@ -9,12 +9,12 @@ namespace Trivia
 
 		public static void Main(string[] args)
 		{
-			DomainEvent.OnDomainEventTriggered += OnDomainEventTriggered;
+			Domains.OnDomainTriggered += OnDomainTriggered;
 
 			var game = new Game(new Player("Chet"), new Player("Pat"), new Player("Sue"));
 			RunOnce(game);
 
-			DomainEvent.OnDomainEventTriggered -= OnDomainEventTriggered;
+			Domains.OnDomainTriggered -= OnDomainTriggered;
 		}
 
 		private static void RunOnce(Game game)
@@ -23,12 +23,12 @@ namespace Trivia
 			game.Roll(roll);
 		}
 
-		private static void OnDomainEventTriggered(IDomainEvent domainEvent)
+		private static void OnDomainTriggered(IDomainBase domainEvent)
 		{
 			switch (domainEvent)
 			{
 				case PlayerRollRequested playerRollRequested:
-					RunOnce(playerRollRequested.Game);
+					playerRollRequested.Response(new PlayerRollResponse(new Roll(Rand.Next(5) + 1, Rand.Next(9) == 7), playerRollRequested));
 					break;
 			}
 		}

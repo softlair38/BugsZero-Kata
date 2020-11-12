@@ -1,12 +1,17 @@
 ﻿namespace Trivia.Domain.Events
 {
-	public struct PlayerRollRequested : IDomainEvent
+	public readonly struct PlayerRollRequested : IDomainRequest
 	{
 		internal PlayerRollRequested(Game game)
 		{
 			Game = game;
 		}
 
-		public Game Game { get; }
+		private Game Game { get; }
+
+		public void Response(PlayerRollResponse playerRollResponse)
+		{
+			Game.Roll(playerRollResponse.Roll);
+		}
 	}
 }

@@ -1,6 +1,6 @@
 ﻿namespace Trivia.Domain.Events
 {
-	public interface IDomainEvent
+	public interface IDomainEvent : IDomainBase
 	{
 	}
 }
