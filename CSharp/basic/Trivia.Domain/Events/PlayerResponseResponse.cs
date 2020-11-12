@@ -2,14 +2,11 @@
 {
 	public readonly struct PlayerResponseResponse : IDomainResponse
 	{
-		public PlayerResponseResponse(int response, PlayerResponseRequested request)
+		public PlayerResponseResponse(int response)
 		{
 			Response = response;
-			Request = request;
 		}
 
 		internal int Response { get; }
-
-		internal PlayerResponseRequested Request { get; }
 	}
 }

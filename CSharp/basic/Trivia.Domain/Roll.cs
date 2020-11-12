@@ -3,12 +3,10 @@
 	public readonly struct Roll
 	{
 		internal int Number { get; }
-		internal bool GoodAnswer { get; }
 
-		public Roll(int nb, bool goodAnswer)
+		public Roll(int nb)
 		{
 			Number = nb;
-			GoodAnswer = goodAnswer;
 		}
 
 		internal bool IsGettingOutOfPenaltyBox => Number % 2 != 0;

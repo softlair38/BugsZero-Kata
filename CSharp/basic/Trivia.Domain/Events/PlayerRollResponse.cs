@@ -2,14 +2,11 @@
 {
 	public readonly struct PlayerRollResponse : IDomainResponse
 	{
-		public PlayerRollResponse(Roll roll, PlayerRollRequested request)
+		public PlayerRollResponse(Roll roll)
 		{
 			Roll = roll;
-			Request = request;
 		}
 
 		internal Roll Roll { get; }
-
-		internal PlayerRollRequested Request { get; }
 	}
 }

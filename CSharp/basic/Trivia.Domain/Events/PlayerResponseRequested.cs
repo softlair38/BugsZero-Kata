@@ -11,7 +11,10 @@
 
 		public void Response(PlayerResponseResponse playerResponseResponse)
 		{
-			//if == 7 Game.GoodResponse
+			if (playerResponseResponse.Response == 7)
+				Game.WrongAnswer();
+			else
+				Game.WasCorrectlyAnswered();
 		}
 	}
 }

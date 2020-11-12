@@ -43,6 +43,8 @@ namespace Trivia
 				DicoQuestions[Category.Sports].Enqueue($"Sports Question {i}");
 				DicoQuestions[Category.Rock].Enqueue($"Rock Question {i}");
 			}
+
+			Domains.RaiseRequest(new PlayerRollRequested(this));
 		}
 
 		private void Add(Player player)
@@ -54,7 +56,7 @@ namespace Trivia
 			Console.WriteLine($"They are player number {Players.Count}");
 		}
 
-		public void Roll(Roll roll)
+		internal void Roll(Roll roll)
 		{
 			Console.WriteLine($"{CurrentPlayer} is the current player");
 			Console.WriteLine($"They have rolled a {roll}");
@@ -77,10 +79,6 @@ namespace Trivia
 			Console.WriteLine($"The category is {CurrentCategory()}");
 
 			AskQuestion();
-			if (roll.GoodAnswer)
-				WrongAnswer();
-			else
-				WasCorrectlyAnswered();
 		}
 
 		private void AskQuestion()
@@ -121,7 +119,7 @@ namespace Trivia
 			}
 		}
 
-		private void WasCorrectlyAnswered()
+		internal void WasCorrectlyAnswered()
 		{
 			Console.WriteLine("Answer was correct!!!!");
 			CurrentPlayer.AddPurse();
@@ -140,7 +138,7 @@ namespace Trivia
 			Domains.RaiseRequest(new PlayerRollRequested(this));
 		}
 
-		private void WrongAnswer()
+		internal void WrongAnswer()
 		{
 			Console.WriteLine("Question was incorrectly answered");
 			Console.WriteLine($"{CurrentPlayer} was sent to the penalty box");
