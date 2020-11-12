@@ -45,6 +45,7 @@
     <Compile Include="Events\Base\IDomainResponse.cs" />
     <Compile Include="Events\GameEnded.cs" />
     <Compile Include="Events\GameStarted.cs" />
+    <Compile Include="Events\PlayerAddedToGame.cs" />
     <Compile Include="Events\PlayerBadResponseSended.cs" />
     <Compile Include="Events\PlayerGoodResponseSended.cs" />
     <Compile Include="Events\PlayerGoOutOfPenaltyBox.cs" />

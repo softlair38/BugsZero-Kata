@@ -49,62 +49,40 @@ namespace Trivia
 				DicoQuestions[Category.Rock].Enqueue($"Rock Question {i}");
 			}
 
-			Domains.RaiseRequest(new PlayerRollRequested(this));
+			Domains.RaiseRequest(new PlayerRollRequested(this, CurrentPlayer));
 		}
 
 		private void Add(Player player)
 		{
 			Players.Add(player);
 			player.ResetGame();
-
-			Console.WriteLine($"{player} was Added");
-			Console.WriteLine($"They are player number {Players.Count}");
+			Domains.RaiseEvent(new PlayerAddedToGame(this, player, Players.Count));
 		}
 
 		internal void Roll(Roll roll)
 		{
-			Console.WriteLine($"{CurrentPlayer} is the current player");
-			Console.WriteLine($"They have rolled a {roll}");
-
 			if (CurrentPlayer.InPenaltyBox)
 				if (roll.IsGettingOutOfPenaltyBox)
 				{
-					Console.WriteLine($"{CurrentPlayer} is getting out of the penalty box");
 					CurrentPlayer.SetNotInPenaltyBox();
-					Domains.RaiseEvent(new PlayerGoOutOfPenaltyBox(this));
+					Domains.RaiseEvent(new PlayerGoOutOfPenaltyBox(this, CurrentPlayer));
 				}
 				else
 				{
-					Console.WriteLine($"{CurrentPlayer} is not getting out of the penalty box");
-					Domains.RaiseEvent(new PlayerStayedInPenaltyBox(this));
+					Domains.RaiseEvent(new PlayerStayedInPenaltyBox(this, CurrentPlayer));
 					NextPlayer();
 					return;
 				}
 
 			CurrentPlayer.Move(roll);
-			Console.WriteLine($"{CurrentPlayer}'s new location is {CurrentPlayer.Places}");
-			Console.WriteLine($"The category is {CurrentCategory()}");
-
-			AskQuestion();
+			Category category = CurrentCategory(CurrentPlayer.Places);
+			string question = DicoQuestions[category].Dequeue();
+			Domains.RaiseRequest(new PlayerResponseRequested(this, CurrentPlayer, question, category.ToString()));
 		}
 
-		private void AskQuestion()
+		private Category CurrentCategory(int place)
 		{
-			switch (CurrentCategory())
-			{
-				case Category.Pop:
-				case Category.Rock:
-				case Category.Science:
-				case Category.Sports:
-					Console.WriteLine(DicoQuestions[CurrentCategory()].Dequeue());
-					Domains.RaiseRequest(new PlayerResponseRequested(this));
-					break;
-			}
-		}
-
-		private Category CurrentCategory()
-		{
-			switch (CurrentPlayer.Places)
+			switch (place)
 			{
 				case 0:
 				case 4:
@@ -128,10 +106,8 @@ namespace Trivia
 
 		internal void WasCorrectlyAnswered()
 		{
-			Console.WriteLine("Answer was correct!!!!");
 			CurrentPlayer.AddPurse();
-			Console.WriteLine($"{CurrentPlayer} now has {CurrentPlayer.Purses} Gold Coins.");
-			Domains.RaiseEvent(new PlayerGoodResponseSended(this));
+			Domains.RaiseEvent(new PlayerGoodResponseSended(this, CurrentPlayer));
 
 			if (!CurrentPlayer.HasWin())
 				NextPlayer();
@@ -145,16 +121,15 @@ namespace Trivia
 				? Players.First()
 				: Players[Players.IndexOf(CurrentPlayer) + 1];
 
-			Domains.RaiseRequest(new PlayerRollRequested(this));
+			Domains.RaiseRequest(new PlayerRollRequested(this, CurrentPlayer));
 		}
 
 		internal void WrongAnswer()
 		{
-			Console.WriteLine("Question was incorrectly answered");
-			Domains.RaiseEvent(new PlayerBadResponseSended(this));
-			Console.WriteLine($"{CurrentPlayer} was sent to the penalty box");
+			Domains.RaiseEvent(new PlayerBadResponseSended(this, CurrentPlayer));
+
 			CurrentPlayer.SetInPenaltyBox();
-			Domains.RaiseEvent(new PlayerWentToPenaltyBox(this));
+			Domains.RaiseEvent(new PlayerWentToPenaltyBox(this, CurrentPlayer));
 
 			NextPlayer();
 		}

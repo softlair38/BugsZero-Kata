@@ -2,12 +2,12 @@
 {
 	public class Player
 	{
-		internal string Name { get; }
+		public string Name { get; }
 
-		internal int Places { get; private set; }
-		internal int Purses { get; private set; }
+		public int Places { get; private set; }
+		public int Purses { get; private set; }
 
-		internal bool InPenaltyBox { get; private set; }
+		public bool InPenaltyBox { get; private set; }
 
 		public Player(string name)
 		{
