@@ -11,23 +11,24 @@ namespace Trivia
 
 		public Place Place => Places.Current;
 
-		public int Purses { get; private set; }
+		public Purse Purse { get; }
 
 		public bool InPenaltyBox { get; private set; }
 
 		private Game Game { get; set; }
 
-		internal Player(string name, IList<Place> places)
+		internal Player(string name, IList<Place> places, Purse purse)
 		{
 			Name = name;
 			Places = new RollingList<Place>(places);
+			Purse = purse;
 		}
 
 		internal void ResetGame(Game game)
 		{
 			Game = game;
 			Places.Reset();
-			Purses = 0;
+			Purse.Reset();
 			InPenaltyBox = false;
 		}
 
@@ -50,10 +51,10 @@ namespace Trivia
 
 		internal void WasCorrectlyAnswered()
 		{
-			Purses++;
+			Purse.WinCoin(1);
 			Domains.RaiseEvent(new PlayerGoodResponseSended(Game, this));
 
-			if (HasWin())
+			if (Purse.HasWin)
 				Domains.RaiseEvent(new GameEnded(Game));
 			else
 				Game.NextPlayer();
@@ -72,11 +73,6 @@ namespace Trivia
 		{
 			InPenaltyBox = false;
 			Domains.RaiseEvent(new PlayerGoOutOfPenaltyBox(Game, this));
-		}
-
-		private bool HasWin()
-		{
-			return Purses == Game.NbPurseToWin;
 		}
 
 		public override string ToString()

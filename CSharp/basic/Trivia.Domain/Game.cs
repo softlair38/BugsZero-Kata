@@ -16,7 +16,7 @@ namespace Trivia
 
 		private const ushort MinPlayers = 2;
 		private const ushort MaxPlayers = 6;
-		internal const ushort NbPurseToWin = 6;
+		private const ushort NbPurseToWin = 6;
 		private const ushort NbPlaces = 12;
 
 		public static void StartNewGame(params string[] players)
@@ -38,7 +38,7 @@ namespace Trivia
 			Places = Enumerable.Range(0, NbPlaces).Select(place => new Place((Category)(place % Questions.NbCategories), place)).ToList();
 
 			int number = 0;
-			List<Player> players = playerNames.Select(p => new Player(p, Places)).ToList();
+			List<Player> players = playerNames.Select(p => new Player(p, Places, new Purse(NbPurseToWin))).ToList();
 			foreach (Player player in players)
 			{
 				number++;
