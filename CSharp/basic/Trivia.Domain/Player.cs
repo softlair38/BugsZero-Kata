@@ -1,4 +1,4 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
 using Trivia.Domain.Events;
 
 namespace Trivia
@@ -7,9 +7,9 @@ namespace Trivia
 	{
 		public string Name { get; }
 
-		private RollingList<int> Places { get; }
+		private RollingList<Place> Places { get; }
 
-		public int Place => Places.Current;
+		public Place Place => Places.Current;
 
 		public int Purses { get; private set; }
 
@@ -17,10 +17,10 @@ namespace Trivia
 
 		private Game Game { get; set; }
 
-		public Player(string name)
+		internal Player(string name, IList<Place> places)
 		{
 			Name = name;
-			Places = new RollingList<int>(Enumerable.Range(0, Game.NbPlaces).ToList());
+			Places = new RollingList<Place>(places);
 		}
 
 		internal void ResetGame(Game game)

@@ -1,6 +1,6 @@
 ﻿namespace Trivia
 {
-	internal enum Category
+	public enum Category
 	{
 		Pop,
 		Science,

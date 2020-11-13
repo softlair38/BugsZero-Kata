@@ -22,7 +22,7 @@ namespace Trivia
 
 		private void Launch()
 		{
-			Game.StartNewGame(new Player("Chet"), new Player("Pat"), new Player("Sue"));
+			Game.StartNewGame("Chet", "Pat", "Sue");
 		}
 
 		private int _r2;
@@ -45,8 +45,8 @@ namespace Trivia
 					break;
 
 				case PlayerResponseRequested playerResponseRequested:
-					Console.WriteLine($"{playerResponseRequested.Player}'s new location is {playerResponseRequested.Player.Place}");
-					Console.WriteLine($"The category is {playerResponseRequested.Category}");
+					Console.WriteLine($"{playerResponseRequested.Player}'s new location is {playerResponseRequested.Player.Place.Location}");
+					Console.WriteLine($"The category is {playerResponseRequested.Player.Place.Category}");
 					Console.WriteLine(playerResponseRequested.Question);
 					playerResponseRequested.Response(new PlayerResponseResponse(_r2));
 					break;

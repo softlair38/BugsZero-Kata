@@ -1,4 +1,6 @@
-﻿using Trivia.Domain.Events;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Trivia.Domain.Events;
 
 namespace Trivia
 {
@@ -8,14 +10,16 @@ namespace Trivia
 
 		private RollingList<Player> Players { get; }
 
+		private IList<Place> Places { get; }
+
 		private Player CurrentPlayer => Players.Current;
 
 		private const ushort MinPlayers = 2;
 		private const ushort MaxPlayers = 6;
 		internal const ushort NbPurseToWin = 6;
-		internal const ushort NbPlaces = 12;
+		private const ushort NbPlaces = 12;
 
-		public static void StartNewGame(params Player[] players)
+		public static void StartNewGame(params string[] players)
 		{
 			if (players == null || players.Length < MinPlayers || players.Length > MaxPlayers)
 			{
@@ -29,9 +33,12 @@ namespace Trivia
 			Domains.RaiseRequest(new PlayerRollRequested(game, game.CurrentPlayer));
 		}
 
-		private Game(params Player[] players)
+		private Game(params string[] playerNames)
 		{
+			Places = Enumerable.Range(0, NbPlaces).Select(place => new Place((Category)(place % Questions.NbCategories), place)).ToList();
+
 			int number = 0;
+			List<Player> players = playerNames.Select(p => new Player(p, Places)).ToList();
 			foreach (Player player in players)
 			{
 				number++;
@@ -47,15 +54,9 @@ namespace Trivia
 			Domains.RaiseEvent(new PlayerAddedToGame(this, player, number));
 		}
 
-		internal void AskQuestion()
+		internal void AskQuestion(Category category)
 		{
-			Category category = CurrentCategory(CurrentPlayer.Place);
-			Domains.RaiseRequest(new PlayerResponseRequested(this, CurrentPlayer, Questions.GetNewOne(category), category.ToString()));
-		}
-
-		private Category CurrentCategory(int place)
-		{
-			return (Category)(place % Questions.NbCategories);
+			Domains.RaiseRequest(new PlayerResponseRequested(this, CurrentPlayer, Questions.GetNewOne(category)));
 		}
 
 		internal void NextPlayer()
