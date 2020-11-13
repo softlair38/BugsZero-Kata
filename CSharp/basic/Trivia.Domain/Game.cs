@@ -35,7 +35,7 @@ namespace Trivia
 				.ToList();
 
 			List<Player> players = playerInfos
-				.Select(p => new Player(p, Places, new Purse(settings.NbPurseToWin)))
+				.Select(p => new Player(p, Places, new Score(settings.NbCoinToWin)))
 				.ToList();
 
 			int number = 0;

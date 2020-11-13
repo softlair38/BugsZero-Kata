@@ -4,14 +4,14 @@
 	{
 		public MinPlayerSetting MinPlayers { get; }
 		public MaxPlayerSetting MaxPlayers { get; }
-		public NbCoinToWinSetting NbPurseToWin { get; }
+		public NbCoinToWinSetting NbCoinToWin { get; }
 		public NbPlacesSetting NbPlaces { get; }
 
-		public GameSettings(MinPlayerSetting minPlayers, MaxPlayerSetting maxPlayers, NbCoinToWinSetting nbPurseToWin, NbPlacesSetting nbPlaces)
+		public GameSettings(MinPlayerSetting minPlayers, MaxPlayerSetting maxPlayers, NbCoinToWinSetting nbCoinToWin, NbPlacesSetting nbPlaces)
 		{
 			MinPlayers = minPlayers;
 			MaxPlayers = maxPlayers;
-			NbPurseToWin = nbPurseToWin;
+			NbCoinToWin = nbCoinToWin;
 			NbPlaces = nbPlaces;
 		}
 	}
