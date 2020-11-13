@@ -3,27 +3,27 @@ using System.Collections.Generic;
 
 namespace Trivia
 {
-	internal class Questions
+	internal class Questions<T> where T : struct
 	{
-		private Dictionary<Category, Queue<string>> DicoQuestions { get; } = new Dictionary<Category, Queue<string>>();
+		private Dictionary<T, Queue<string>> DicoQuestions { get; } = new Dictionary<T, Queue<string>>();
 
 		private int _index;
 
 		public Questions()
 		{
-			foreach (Category category in Enum.GetValues(typeof(Category)))
+			foreach (T category in Enum.GetValues(typeof(T)))
 				DicoQuestions.Add(category, new Queue<string>());
 		}
 
 		private void FillAll()
 		{
-			foreach (Category category in Enum.GetValues(typeof(Category)))
+			foreach (T category in Enum.GetValues(typeof(T)))
 				Fill(category, _index, _index + 5);
 
 			_index += 5;
 		}
 
-		private void Fill(Category category, int start, int end)
+		private void Fill(T category, int start, int end)
 		{
 			var queue = DicoQuestions[category];
 			for (int i = start; i < end; i++)
@@ -32,7 +32,7 @@ namespace Trivia
 			}
 		}
 
-		public string GetNewOne(Category category)
+		public string GetNewOne(T category)
 		{
 			Queue<string> queue = DicoQuestions[category];
 			if (queue.Count == 0)

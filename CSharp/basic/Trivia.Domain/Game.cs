@@ -14,7 +14,7 @@ namespace Trivia
 		internal const ushort NbPurseToWin = 6;
 		internal const ushort NbPlaces = 12;
 
-		private Questions Questions { get; } = new Questions();
+		private Questions<Category> Questions { get; } = new Questions<Category>();
 
 		private Player CurrentPlayer { get; set; }
 
