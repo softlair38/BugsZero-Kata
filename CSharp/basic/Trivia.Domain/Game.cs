@@ -19,26 +19,31 @@ namespace Trivia
 		private const ushort NbPurseToWin = 6;
 		private const ushort NbPlaces = 12;
 
-		public static void StartNewGame(params string[] players)
+		public static void StartNewGame(params PlayerInfo[] playerInfos)
 		{
-			if (players == null || players.Length < MinPlayers || players.Length > MaxPlayers)
+			if (playerInfos == null || playerInfos.Length < MinPlayers || playerInfos.Length > MaxPlayers)
 			{
 				Domains.RaiseEvent(new GameErrorOccured($"Le nombre de joueur doit être compris entre {MinPlayers} et {MaxPlayers}"));
 				return;
 			}
 
-			var game = new Game(players);
+			var game = new Game(playerInfos);
 
 			Domains.RaiseEvent(new GameStarted(game));
 			Domains.RaiseRequest(new PlayerRollRequested(game, game.CurrentPlayer));
 		}
 
-		private Game(params string[] playerNames)
+		private Game(params PlayerInfo[] playerInfos)
 		{
-			Places = Enumerable.Range(0, NbPlaces).Select(place => new Place((Category)(place % Questions.NbCategories), place)).ToList();
+			Places = Enumerable.Range(0, NbPlaces)
+				.Select(place => new Place((Category)(place % Questions.NbCategories), place))
+				.ToList();
+
+			List<Player> players = playerInfos
+				.Select(p => new Player(p, Places, new Purse(NbPurseToWin)))
+				.ToList();
 
 			int number = 0;
-			List<Player> players = playerNames.Select(p => new Player(p, Places, new Purse(NbPurseToWin))).ToList();
 			foreach (Player player in players)
 			{
 				number++;

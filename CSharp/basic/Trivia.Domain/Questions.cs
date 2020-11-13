@@ -33,9 +33,7 @@ namespace Trivia
 		{
 			var queue = DicoQuestions[category];
 			for (int i = start; i < end; i++)
-			{
 				queue.Enqueue($"{category} Question {i}");
-			}
 		}
 
 		public string GetNewOne(T category)

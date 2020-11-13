@@ -60,6 +60,7 @@
     <Compile Include="Place.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Events\PlayerRollRequested.cs" />
+    <Compile Include="PlayerInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Purse.cs" />
     <Compile Include="Questions.cs" />

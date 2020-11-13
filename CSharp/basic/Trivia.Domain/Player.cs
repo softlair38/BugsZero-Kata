@@ -5,7 +5,7 @@ namespace Trivia
 {
 	public class Player
 	{
-		public string Name { get; }
+		public PlayerInfo Info { get; }
 
 		private RollingList<Place> Places { get; }
 
@@ -17,9 +17,9 @@ namespace Trivia
 
 		private Game Game { get; set; }
 
-		internal Player(string name, IList<Place> places, Purse purse)
+		internal Player(PlayerInfo playerInfo, IList<Place> places, Purse purse)
 		{
-			Name = name;
+			Info = playerInfo;
 			Places = new RollingList<Place>(places);
 			Purse = purse;
 		}
@@ -77,7 +77,7 @@ namespace Trivia
 
 		public override string ToString()
 		{
-			return Name;
+			return Info.Name;
 		}
 	}
 }

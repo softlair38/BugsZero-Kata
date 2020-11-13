@@ -22,7 +22,10 @@ namespace Trivia
 
 		private void Launch()
 		{
-			Game.StartNewGame("Chet", "Pat", "Sue");
+			Game.StartNewGame(
+				new PlayerInfo("Chet", 14),
+				new PlayerInfo("Pat", 16),
+				new PlayerInfo("Sue", 15));
 		}
 
 		private int _r2;
