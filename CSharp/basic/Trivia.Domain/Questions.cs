@@ -5,7 +5,7 @@ namespace Trivia
 {
 	internal class Questions<T> where T : struct
 	{
-		private Dictionary<T, Queue<string>> DicoQuestions { get; }
+		private Dictionary<T, Queue<Question>> DicoQuestions { get; }
 
 		private int _index;
 
@@ -15,10 +15,10 @@ namespace Trivia
 		{
 			NbCategories = Enum.GetValues(typeof(T)).Length;
 
-			DicoQuestions = new Dictionary<T, Queue<string>>(NbCategories);
+			DicoQuestions = new Dictionary<T, Queue<Question>>(NbCategories);
 
 			foreach (T category in Enum.GetValues(typeof(T)))
-				DicoQuestions.Add(category, new Queue<string>());
+				DicoQuestions.Add(category, new Queue<Question>());
 		}
 
 		private void FillAll()
@@ -31,14 +31,14 @@ namespace Trivia
 
 		private void Fill(T category, int start, int end)
 		{
-			var queue = DicoQuestions[category];
+			Queue<Question> queue = DicoQuestions[category];
 			for (int i = start; i < end; i++)
-				queue.Enqueue($"{category} Question {i}");
+				queue.Enqueue(new Question($"{category} Question {i}", new Response(7)));
 		}
 
-		public string GetNewOne(T category)
+		public Question GetNewOne(T category)
 		{
-			Queue<string> queue = DicoQuestions[category];
+			Queue<Question> queue = DicoQuestions[category];
 			if (queue.Count == 0)
 				FillAll();
 

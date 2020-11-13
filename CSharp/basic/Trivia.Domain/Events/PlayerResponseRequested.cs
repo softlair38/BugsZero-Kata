@@ -2,7 +2,7 @@
 {
 	public readonly struct PlayerResponseRequested : IDomainRequest
 	{
-		internal PlayerResponseRequested(Game game, Player player, string question)
+		internal PlayerResponseRequested(Game game, Player player, Question question)
 		{
 			Game = game;
 			Player = player;
@@ -11,11 +11,11 @@
 
 		private Game Game { get; }
 		public Player Player { get; }
-		public string Question { get; }
+		public Question Question { get; }
 
-		public void Response(PlayerResponseResponse playerResponseResponse)
+		public void Response(Response response)
 		{
-			if (playerResponseResponse.Response == 7)
+			if (Question.IsGoodResponse(response))
 				Player.WrongAnswer();
 			else
 				Player.WasCorrectlyAnswered();

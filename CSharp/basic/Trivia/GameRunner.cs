@@ -46,14 +46,14 @@ namespace Trivia
 					_r2 = Rand.Next(9);
 					Console.WriteLine($"{playerRollRequested.Player} is the current player");
 					Console.WriteLine($"They have rolled a {r1}");
-					playerRollRequested.Response(new PlayerRollResponse(new Roll(r1)));
+					playerRollRequested.Response(new Roll(r1));
 					break;
 
 				case PlayerResponseRequested playerResponseRequested:
 					Console.WriteLine($"{playerResponseRequested.Player}'s new location is {playerResponseRequested.Player.Place.Location}");
 					Console.WriteLine($"The category is {playerResponseRequested.Player.Place.Category}");
 					Console.WriteLine(playerResponseRequested.Question);
-					playerResponseRequested.Response(new PlayerResponseResponse(_r2));
+					playerResponseRequested.Response(new Response(_r2));
 					break;
 
 				case PlayerWentToPenaltyBox playerWentToPenaltyBox:

@@ -11,9 +11,9 @@
 		private Game Game { get; }
 		public Player Player { get; }
 
-		public void Response(PlayerRollResponse playerRollResponse)
+		public void Response(Roll roll)
 		{
-			Player.Roll(playerRollResponse.Roll);
+			Player.Roll(roll);
 		}
 	}
 }
