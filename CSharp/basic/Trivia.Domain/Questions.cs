@@ -5,12 +5,18 @@ namespace Trivia
 {
 	internal class Questions<T> where T : struct
 	{
-		private Dictionary<T, Queue<string>> DicoQuestions { get; } = new Dictionary<T, Queue<string>>();
+		private Dictionary<T, Queue<string>> DicoQuestions { get; }
 
 		private int _index;
 
+		public int NbCategories { get; }
+
 		public Questions()
 		{
+			NbCategories = Enum.GetValues(typeof(T)).Length;
+
+			DicoQuestions = new Dictionary<T, Queue<string>>(NbCategories);
+
 			foreach (T category in Enum.GetValues(typeof(T)))
 				DicoQuestions.Add(category, new Queue<string>());
 		}

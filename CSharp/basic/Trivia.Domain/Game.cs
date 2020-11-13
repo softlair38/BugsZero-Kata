@@ -6,9 +6,9 @@ namespace Trivia
 {
 	public class Game
 	{
-		private Questions<Category> Questions { get; }
+		private Questions<Category> Questions { get; } = new Questions<Category>();
 
-		private List<Player> Players { get; }
+		private List<Player> Players { get; } = new List<Player>();
 		private Player CurrentPlayer { get; set; }
 
 		private const ushort MinPlayers = 2;
@@ -32,13 +32,8 @@ namespace Trivia
 
 		private Game(params Player[] players)
 		{
-			Questions = new Questions<Category>();
-
-			Players = new List<Player>();
 			foreach (Player player in players)
-			{
 				Add(player);
-			}
 
 			CurrentPlayer = Players.First();
 		}
@@ -58,7 +53,7 @@ namespace Trivia
 
 		private Category CurrentCategory(int place)
 		{
-			return (Category)(place % 4);
+			return (Category)(place % Questions.NbCategories);
 		}
 
 		internal void NextPlayer()
