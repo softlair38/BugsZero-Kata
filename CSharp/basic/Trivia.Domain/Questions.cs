@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Trivia
 {
@@ -6,26 +7,38 @@ namespace Trivia
 	{
 		private Dictionary<Category, Queue<string>> DicoQuestions { get; } = new Dictionary<Category, Queue<string>>();
 
+		private int _index;
+
 		public Questions()
 		{
-			Fill(Category.Pop);
-			Fill(Category.Science);
-			Fill(Category.Sports);
-			Fill(Category.Rock);
+			foreach (Category category in Enum.GetValues(typeof(Category)))
+				DicoQuestions.Add(category, new Queue<string>());
 		}
 
-		private void Fill(Category category)
+		private void FillAll()
 		{
-			DicoQuestions.Add(category, new Queue<string>());
-			for (int i = 0; i < 50; i++)
+			foreach (Category category in Enum.GetValues(typeof(Category)))
+				Fill(category, _index, _index + 5);
+
+			_index += 5;
+		}
+
+		private void Fill(Category category, int start, int end)
+		{
+			var queue = DicoQuestions[category];
+			for (int i = start; i < end; i++)
 			{
-				DicoQuestions[category].Enqueue($"{category} Question {i}");
+				queue.Enqueue($"{category} Question {i}");
 			}
 		}
 
 		public string GetNewOne(Category category)
 		{
-			return DicoQuestions[category].Dequeue();
+			Queue<string> queue = DicoQuestions[category];
+			if (queue.Count == 0)
+				FillAll();
+
+			return queue.Dequeue();
 		}
 	}
 }
