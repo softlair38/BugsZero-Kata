@@ -42,7 +42,7 @@ namespace Trivia
 			if (InPenaltyBox)
 			{
 				Domains.RaiseEvent(new PlayerStayedInPenaltyBox(Game, this));
-				Game.NextPlayer();
+				Game.Players.GoToNextPlayer();
 			}
 			else
 			{
@@ -59,7 +59,7 @@ namespace Trivia
 			if (Score.HasWin)
 				Domains.RaiseEvent(new GameEnded(Game));
 			else
-				Game.NextPlayer();
+				Game.Players.GoToNextPlayer();
 		}
 
 		internal void WrongAnswer()
@@ -68,7 +68,7 @@ namespace Trivia
 			InPenaltyBox = true;
 
 			Domains.RaiseEvent(new PlayerWentToPenaltyBox(Game, this));
-			Game.NextPlayer();
+			Game.Players.GoToNextPlayer();
 		}
 
 		private void SetNotInPenaltyBox()

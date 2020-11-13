@@ -37,6 +37,7 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Players.cs" />
     <Compile Include="ValueType\Location.cs" />
     <Compile Include="ValueType\MaxPlayerSetting.cs" />
     <Compile Include="ValueType\MinPlayerSetting.cs" />

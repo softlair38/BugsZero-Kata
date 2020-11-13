@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Trivia.Domain.Events;
+﻿using Trivia.Domain.Events;
 
 namespace Trivia
 {
@@ -8,11 +6,9 @@ namespace Trivia
 	{
 		private Questions<Category> Questions { get; } = new Questions<Category>();
 
-		private RollingList<Player> Players { get; }
+		internal Players Players { get; }
 
 		private Places Places { get; }
-
-		private Player CurrentPlayer => Players.Current;
 
 		public static void StartNewGame(GameSettings settings, params PlayerInfo[] playerInfos)
 		{
@@ -25,42 +21,18 @@ namespace Trivia
 			var game = new Game(settings, playerInfos);
 
 			Domains.RaiseEvent(new GameStarted(game));
-			Domains.RaiseRequest(new PlayerRollRequested(game, game.CurrentPlayer));
+			Domains.RaiseRequest(new PlayerRollRequested(game, game.Players.Current));
 		}
 
 		private Game(GameSettings settings, params PlayerInfo[] playerInfos)
 		{
 			Places = new Places(settings.NbPlaces, Questions);
-
-			List<Player> players = playerInfos
-				.Select(p => new Player(p, Places, new Score(settings.NbCoinToWin)))
-				.ToList();
-
-			int number = 0;
-			foreach (Player player in players)
-			{
-				number++;
-				Add(player, number);
-			}
-
-			Players = new RollingList<Player>(players);
-		}
-
-		private void Add(Player player, int number)
-		{
-			player.ResetGame(this, number);
-			Domains.RaiseEvent(new PlayerAddedToGame(this, player));
+			Players = new Players(playerInfos, settings.NbCoinToWin, Places, this);
 		}
 
 		internal void AskQuestion(Category category)
 		{
-			Domains.RaiseRequest(new PlayerResponseRequested(this, CurrentPlayer, Questions.GetNewOne(category)));
-		}
-
-		internal void NextPlayer()
-		{
-			Players.Next();
-			Domains.RaiseRequest(new PlayerRollRequested(this, CurrentPlayer));
+			Domains.RaiseRequest(new PlayerResponseRequested(this, Players.Current, Questions.GetNewOne(category)));
 		}
 	}
 }
