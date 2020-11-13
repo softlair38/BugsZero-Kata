@@ -16,7 +16,7 @@ namespace Trivia
 
 		public static void StartNewGame(GameSettings settings, params PlayerInfo[] playerInfos)
 		{
-			if (playerInfos == null || playerInfos.Length < settings.MinPlayers || playerInfos.Length > settings.MaxPlayers)
+			if (playerInfos == null || playerInfos.Length < settings.MinPlayers.Value || playerInfos.Length > settings.MaxPlayers.Value)
 			{
 				Domains.RaiseEvent(new GameErrorOccured($"Le nombre de joueur doit être compris entre {settings.MinPlayers} et {settings.MaxPlayers}"));
 				return;
@@ -30,7 +30,7 @@ namespace Trivia
 
 		private Game(GameSettings settings, params PlayerInfo[] playerInfos)
 		{
-			Places = Enumerable.Range(0, settings.NbPlaces)
+			Places = Enumerable.Range(0, settings.NbPlaces.Value)
 				.Select(place => new Place((Category)(place % Questions.NbCategories), new Location(place)))
 				.ToList();
 

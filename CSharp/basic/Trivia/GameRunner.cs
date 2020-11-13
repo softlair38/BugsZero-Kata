@@ -7,7 +7,11 @@ namespace Trivia
 	{
 		private static readonly Random Rand = new Random(new Guid("1BEFC143-CBA2-4F3D-9219-F2220F792D28").GetHashCode());
 
-		private GameSettings GameSettings { get; } = new GameSettings(2, 6, 6, 12);
+		private GameSettings GameSettings { get; } = new GameSettings(
+			new MinPlayerSetting(2),
+			new MaxPlayerSetting(6),
+			new NbCoinToWinSetting(6),
+			new NbPlacesSetting(12));
 
 		internal GameRunner()
 		{

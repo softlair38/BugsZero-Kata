@@ -4,13 +4,13 @@
 	{
 		public int Coin { get; private set; }
 
-		public int NbPurseToWin { get; }
+		public NbCoinToWinSetting NbPurseToWin { get; }
 
-		public bool HasWin => Coin == NbPurseToWin;
+		public bool HasWin => Coin == NbPurseToWin.Value;
 
-		internal Purse(int nbPurseToWin)
+		internal Purse(NbCoinToWinSetting nbCoinToWin)
 		{
-			NbPurseToWin = nbPurseToWin;
+			NbPurseToWin = nbCoinToWin;
 		}
 
 		internal void WinCoin(int nb)
