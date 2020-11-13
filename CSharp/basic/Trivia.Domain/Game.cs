@@ -4,11 +4,9 @@ namespace Trivia
 {
 	public class Game
 	{
-		private Questions<Category> Questions { get; } = new Questions<Category>();
+		internal Questions<Category> Questions { get; } = new Questions<Category>();
 
 		internal Players Players { get; }
-
-		private Places Places { get; }
 
 		public static void StartNewGame(GameSettings settings, params PlayerInfo[] playerInfos)
 		{
@@ -26,13 +24,8 @@ namespace Trivia
 
 		private Game(GameSettings settings, params PlayerInfo[] playerInfos)
 		{
-			Places = new Places(settings.NbPlaces, Questions);
-			Players = new Players(playerInfos, settings.NbCoinToWin, Places, this);
-		}
-
-		internal void AskQuestion(Category category)
-		{
-			Domains.RaiseRequest(new PlayerResponseRequested(this, Players.Current, Questions.GetNewOne(category)));
+			var places = new Places(settings.NbPlaces, Questions);
+			Players = new Players(playerInfos, settings.NbCoinToWin, places, this);
 		}
 	}
 }

@@ -9,9 +9,9 @@ namespace Trivia
 
 		private int _index;
 
-		public int NbCategories { get; }
+		internal int NbCategories { get; }
 
-		public Questions()
+		internal Questions()
 		{
 			NbCategories = Enum.GetValues(typeof(T)).Length;
 
@@ -36,7 +36,7 @@ namespace Trivia
 				queue.Enqueue(new Question($"{category} Question {i}", new Response(7)));
 		}
 
-		public Question GetNewOne(T category)
+		internal Question GetNewOne(T category)
 		{
 			Queue<Question> queue = DicoQuestions[category];
 			if (queue.Count == 0)

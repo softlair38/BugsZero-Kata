@@ -47,8 +47,13 @@ namespace Trivia
 			else
 			{
 				Places.Next(roll.Number);
-				Game.AskQuestion(Place.Category);
+				AskQuestion(Place.Category);
 			}
+		}
+
+		private void AskQuestion(Category category)
+		{
+			Domains.RaiseRequest(new PlayerResponseRequested(Game, this, Game.Questions.GetNewOne(category)));
 		}
 
 		internal void WasCorrectlyAnswered()
