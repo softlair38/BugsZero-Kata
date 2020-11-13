@@ -31,7 +31,7 @@ namespace Trivia
 		private Game(GameSettings settings, params PlayerInfo[] playerInfos)
 		{
 			Places = Enumerable.Range(0, settings.NbPlaces)
-				.Select(place => new Place((Category)(place % Questions.NbCategories), place))
+				.Select(place => new Place((Category)(place % Questions.NbCategories), new Location(place)))
 				.ToList();
 
 			List<Player> players = playerInfos

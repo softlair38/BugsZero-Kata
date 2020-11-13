@@ -4,9 +4,9 @@
 	{
 		public Category Category { get; }
 
-		public int Location { get; }
+		public Location Location { get; }
 
-		public Place(Category category, int location)
+		public Place(Category category, Location location)
 		{
 			Category = category;
 			Location = location;

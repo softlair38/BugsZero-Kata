@@ -37,6 +37,7 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ValueType\Location.cs" />
     <Compile Include="ValueType\Question.cs" />
     <Compile Include="ValueType\Category.cs" />
     <Compile Include="Events\Base\Domains.cs" />
