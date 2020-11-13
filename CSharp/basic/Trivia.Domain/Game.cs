@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Trivia.Domain.Events;
+﻿using Trivia.Domain.Events;
 
 namespace Trivia
 {
@@ -8,8 +6,9 @@ namespace Trivia
 	{
 		private Questions<Category> Questions { get; } = new Questions<Category>();
 
-		private List<Player> Players { get; } = new List<Player>();
-		private Player CurrentPlayer { get; set; }
+		private RollingList<Player> Players { get; }
+
+		private Player CurrentPlayer => Players.Current;
 
 		private const ushort MinPlayers = 2;
 		private const ushort MaxPlayers = 6;
@@ -32,22 +31,25 @@ namespace Trivia
 
 		private Game(params Player[] players)
 		{
+			int number = 0;
 			foreach (Player player in players)
-				Add(player);
+			{
+				number++;
+				Add(player, number);
+			}
 
-			CurrentPlayer = Players.First();
+			Players = new RollingList<Player>(players);
 		}
 
-		private void Add(Player player)
+		private void Add(Player player, int number)
 		{
 			player.ResetGame(this);
-			Players.Add(player);
-			Domains.RaiseEvent(new PlayerAddedToGame(this, player, Players.Count));
+			Domains.RaiseEvent(new PlayerAddedToGame(this, player, number));
 		}
 
 		internal void AskQuestion()
 		{
-			Category category = CurrentCategory(CurrentPlayer.Places);
+			Category category = CurrentCategory(CurrentPlayer.Place);
 			Domains.RaiseRequest(new PlayerResponseRequested(this, CurrentPlayer, Questions.GetNewOne(category), category.ToString()));
 		}
 
@@ -58,10 +60,7 @@ namespace Trivia
 
 		internal void NextPlayer()
 		{
-			CurrentPlayer = Players.IndexOf(CurrentPlayer) == Players.Count - 1
-				? Players.First()
-				: Players[Players.IndexOf(CurrentPlayer) + 1];
-
+			Players.Next();
 			Domains.RaiseRequest(new PlayerRollRequested(this, CurrentPlayer));
 		}
 	}

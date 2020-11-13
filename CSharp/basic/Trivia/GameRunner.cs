@@ -45,7 +45,7 @@ namespace Trivia
 					break;
 
 				case PlayerResponseRequested playerResponseRequested:
-					Console.WriteLine($"{playerResponseRequested.Player}'s new location is {playerResponseRequested.Player.Places}");
+					Console.WriteLine($"{playerResponseRequested.Player}'s new location is {playerResponseRequested.Player.Place}");
 					Console.WriteLine($"The category is {playerResponseRequested.Category}");
 					Console.WriteLine(playerResponseRequested.Question);
 					playerResponseRequested.Response(new PlayerResponseResponse(_r2));

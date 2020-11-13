@@ -1,4 +1,5 @@
-﻿using Trivia.Domain.Events;
+﻿using System.Linq;
+using Trivia.Domain.Events;
 
 namespace Trivia
 {
@@ -6,7 +7,10 @@ namespace Trivia
 	{
 		public string Name { get; }
 
-		public int Places { get; private set; }
+		private RollingList<int> Places { get; }
+
+		public int Place => Places.Current;
+
 		public int Purses { get; private set; }
 
 		public bool InPenaltyBox { get; private set; }
@@ -16,12 +20,13 @@ namespace Trivia
 		public Player(string name)
 		{
 			Name = name;
+			Places = new RollingList<int>(Enumerable.Range(0, Game.NbPlaces).ToList());
 		}
 
 		internal void ResetGame(Game game)
 		{
 			Game = game;
-			Places = 0;
+			Places.Reset();
 			Purses = 0;
 			InPenaltyBox = false;
 		}
@@ -46,10 +51,7 @@ namespace Trivia
 
 		private void Move(Roll roll)
 		{
-			Places += roll.Number;
-
-			if (Places >= Game.NbPlaces)
-				Places -= Game.NbPlaces;
+			Places.Next(roll.Number);
 		}
 
 		internal void WasCorrectlyAnswered()
@@ -67,6 +69,7 @@ namespace Trivia
 		{
 			Domains.RaiseEvent(new PlayerBadResponseSended(Game, this));
 			InPenaltyBox = true;
+
 			Domains.RaiseEvent(new PlayerWentToPenaltyBox(Game, this));
 			Game.NextPlayer();
 		}
