@@ -7,19 +7,27 @@ namespace Trivia
 	{
 		private static readonly Random Rand = new Random(new Guid("1BEFC143-CBA2-4F3D-9219-F2220F792D28").GetHashCode());
 
+		private Game CurrentGame { get; set; }
+
 		private GameSettings GameSettings { get; } = new GameSettings(
 			new MinPlayerSetting(2),
 			new MaxPlayerSetting(6),
 			new NbCoinToWinSetting(6),
 			new NbPlacesSetting(12));
 
-		internal GameRunner()
+		public GameRunner()
 		{
 			Domains.OnDomainTriggered += OnDomainTriggered;
 		}
 
-		internal void Launch()
+		public void Launch()
 		{
+			if (CurrentGame != null)
+			{
+				CurrentGame.Restart();
+				return;
+			}
+
 			Game.StartNewGame(GameSettings,
 				new PlayerInfo("Chet", 14),
 				new PlayerInfo("Pat", 16),
@@ -32,6 +40,12 @@ namespace Trivia
 		{
 			switch (domainEvent)
 			{
+				case GameStarted gameStarted:
+					CurrentGame = gameStarted.Game;
+					Console.WriteLine("Game started");
+					Console.WriteLine();
+					break;
+
 				case PlayerAddedToGame playerAddedToGame:
 					Console.WriteLine($"{playerAddedToGame.Player} was Added");
 					Console.WriteLine($"They are player number {playerAddedToGame.Player.Number}");

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Trivia.Domain.Events;
 
 namespace Trivia
@@ -15,25 +14,31 @@ namespace Trivia
 		internal Players(IList<PlayerInfo> playerInfos, NbCoinToWinSetting nbCoinToWin, Places places, Game game)
 		{
 			Game = game;
-			List<Player> players = playerInfos
-				.Select(p => new Player(p, places, new Score(nbCoinToWin)))
-				.ToList();
 
-			int number = 0;
-			foreach (Player player in players)
+			var list = new List<Player>();
+			foreach (PlayerInfo playerInfo in playerInfos)
 			{
-				number++;
-				player.ResetGame(game, number);
+				var player = new Player(playerInfo, places, new Score(nbCoinToWin), list.Count + 1, Game);
+				list.Add(player);
 				Domains.RaiseEvent(new PlayerAddedToGame(game, player));
 			}
 
-			Values = new RollingList<Player>(players);
+			Values = new RollingList<Player>(list);
 		}
 
 		internal void GoToNextPlayer()
 		{
 			Values.Next();
 			Domains.RaiseRequest(new PlayerRollRequested(Game, Current));
+		}
+
+		internal void Reset()
+		{
+			Values.Reset();
+			foreach (Player player in Values.InternalValues)
+			{
+				player.Reset();
+			}
 		}
 	}
 }

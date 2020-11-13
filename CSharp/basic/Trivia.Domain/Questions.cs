@@ -44,5 +44,15 @@ namespace Trivia
 
 			return queue.Dequeue();
 		}
+
+		internal void Reset()
+		{
+			foreach (Queue<Question> questions in DicoQuestions.Values)
+			{
+				questions.Clear();
+			}
+
+			_index = 0;
+		}
 	}
 }

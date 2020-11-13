@@ -14,21 +14,21 @@ namespace Trivia
 
 		public bool InPenaltyBox { get; private set; }
 
-		public int Number { get; private set; }
+		public int Number { get; }
 
-		private Game Game { get; set; }
+		private Game Game { get; }
 
-		internal Player(PlayerInfo playerInfo, Places places, Score score)
+		internal Player(PlayerInfo playerInfo, Places places, Score score, int number, Game game)
 		{
 			Info = playerInfo;
 			Places = new RollingList<Place>(places.Values);
 			Score = score;
+			Number = number;
+			Game = game;
 		}
 
-		internal void ResetGame(Game game, int number)
+		internal void Reset()
 		{
-			Game = game;
-			Number = number;
 			Places.Reset();
 			Score.Reset();
 			InPenaltyBox = false;

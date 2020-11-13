@@ -17,15 +17,27 @@ namespace Trivia
 			}
 
 			var game = new Game(settings, playerInfos);
-
-			Domains.RaiseEvent(new GameStarted(game));
-			Domains.RaiseRequest(new PlayerRollRequested(game, game.Players.Current));
+			game.Start();
 		}
 
 		private Game(GameSettings settings, params PlayerInfo[] playerInfos)
 		{
 			var places = new Places(settings.NbPlaces, Questions);
 			Players = new Players(playerInfos, settings.NbCoinToWin, places, this);
+		}
+
+		public void Restart()
+		{
+			Players.Reset();
+			Questions.Reset();
+
+			Start();
+		}
+
+		private void Start()
+		{
+			Domains.RaiseEvent(new GameStarted(this));
+			Domains.RaiseRequest(new PlayerRollRequested(this, Players.Current));
 		}
 	}
 }

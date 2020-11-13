@@ -5,7 +5,7 @@ namespace Trivia
 {
 	internal class RollingList<T>
 	{
-		private IList<T> InternalValues { get; }
+		internal IList<T> InternalValues { get; }
 
 		public T Current { get; private set; }
 

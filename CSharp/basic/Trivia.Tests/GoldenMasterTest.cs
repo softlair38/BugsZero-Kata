@@ -22,10 +22,13 @@ namespace Trivia.Tests
 					TextWriter oldOut = Console.Out;
 					Console.SetOut(streamWriter);
 
-					for (int i = 0; i < 20; i++)
+					using (var gameRunner = new GameRunner())
 					{
-						Console.WriteLine();
-						Program.Main(null);
+						for (int i = 0; i < 20; i++)
+						{
+							Console.WriteLine();
+							gameRunner.Launch();
+						}
 					}
 
 					Console.SetOut(oldOut);

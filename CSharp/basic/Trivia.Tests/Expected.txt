@@ -5,6 +5,8 @@ Pat was Added
 They are player number 2
 Sue was Added
 They are player number 3
+Game started
+
 Chet is the current player
 They have rolled a 4
 Chet's new location is 4
@@ -118,12 +120,8 @@ Pop Question 6
 Answer was correct!!!!
 Sue now has 6 Gold Coins.
 
-Chet was Added
-They are player number 1
-Pat was Added
-They are player number 2
-Sue was Added
-They are player number 3
+Game started
+
 Chet is the current player
 They have rolled a 2
 Chet's new location is 2
@@ -235,12 +233,8 @@ Science Question 4
 Answer was correct!!!!
 Chet now has 6 Gold Coins.
 
-Chet was Added
-They are player number 1
-Pat was Added
-They are player number 2
-Sue was Added
-They are player number 3
+Game started
+
 Chet is the current player
 They have rolled a 2
 Chet's new location is 2
@@ -363,12 +357,8 @@ Science Question 5
 Answer was correct!!!!
 Pat now has 6 Gold Coins.
 
-Chet was Added
-They are player number 1
-Pat was Added
-They are player number 2
-Sue was Added
-They are player number 3
+Game started
+
 Chet is the current player
 They have rolled a 5
 Chet's new location is 5
@@ -483,12 +473,8 @@ Science Question 6
 Answer was correct!!!!
 Chet now has 6 Gold Coins.
 
-Chet was Added
-They are player number 1
-Pat was Added
-They are player number 2
-Sue was Added
-They are player number 3
+Game started
+
 Chet is the current player
 They have rolled a 3
 Chet's new location is 3
@@ -614,12 +600,8 @@ Sports Question 5
 Answer was correct!!!!
 Sue now has 6 Gold Coins.
 
-Chet was Added
-They are player number 1
-Pat was Added
-They are player number 2
-Sue was Added
-They are player number 3
+Game started
+
 Chet is the current player
 They have rolled a 2
 Chet's new location is 2
@@ -756,12 +738,8 @@ Pop Question 4
 Answer was correct!!!!
 Pat now has 6 Gold Coins.
 
-Chet was Added
-They are player number 1
-Pat was Added
-They are player number 2
-Sue was Added
-They are player number 3
+Game started
+
 Chet is the current player
 They have rolled a 1
 Chet's new location is 1
@@ -883,12 +861,8 @@ Pop Question 2
 Answer was correct!!!!
 Sue now has 6 Gold Coins.
 
-Chet was Added
-They are player number 1
-Pat was Added
-They are player number 2
-Sue was Added
-They are player number 3
+Game started
+
 Chet is the current player
 They have rolled a 2
 Chet's new location is 2
@@ -1002,12 +976,8 @@ Sports Question 2
 Answer was correct!!!!
 Chet now has 6 Gold Coins.
 
-Chet was Added
-They are player number 1
-Pat was Added
-They are player number 2
-Sue was Added
-They are player number 3
+Game started
+
 Chet is the current player
 They have rolled a 4
 Chet's new location is 4
@@ -1117,12 +1087,8 @@ Sports Question 1
 Answer was correct!!!!
 Pat now has 6 Gold Coins.
 
-Chet was Added
-They are player number 1
-Pat was Added
-They are player number 2
-Sue was Added
-They are player number 3
+Game started
+
 Chet is the current player
 They have rolled a 5
 Chet's new location is 5
@@ -1259,12 +1225,8 @@ Science Question 7
 Answer was correct!!!!
 Chet now has 6 Gold Coins.
 
-Chet was Added
-They are player number 1
-Pat was Added
-They are player number 2
-Sue was Added
-They are player number 3
+Game started
+
 Chet is the current player
 They have rolled a 4
 Chet's new location is 4
@@ -1379,12 +1341,8 @@ Pop Question 2
 Answer was correct!!!!
 Chet now has 6 Gold Coins.
 
-Chet was Added
-They are player number 1
-Pat was Added
-They are player number 2
-Sue was Added
-They are player number 3
+Game started
+
 Chet is the current player
 They have rolled a 3
 Chet's new location is 3
@@ -1499,12 +1457,8 @@ Rock Question 4
 Answer was correct!!!!
 Chet now has 6 Gold Coins.
 
-Chet was Added
-They are player number 1
-Pat was Added
-They are player number 2
-Sue was Added
-They are player number 3
+Game started
+
 Chet is the current player
 They have rolled a 5
 Chet's new location is 5
@@ -1618,12 +1572,8 @@ Pop Question 2
 Answer was correct!!!!
 Chet now has 6 Gold Coins.
 
-Chet was Added
-They are player number 1
-Pat was Added
-They are player number 2
-Sue was Added
-They are player number 3
+Game started
+
 Chet is the current player
 They have rolled a 2
 Chet's new location is 2
@@ -1738,12 +1688,8 @@ Pop Question 4
 Answer was correct!!!!
 Chet now has 6 Gold Coins.
 
-Chet was Added
-They are player number 1
-Pat was Added
-They are player number 2
-Sue was Added
-They are player number 3
+Game started
+
 Chet is the current player
 They have rolled a 4
 Chet's new location is 4
@@ -1857,12 +1803,8 @@ Science Question 4
 Answer was correct!!!!
 Chet now has 6 Gold Coins.
 
-Chet was Added
-They are player number 1
-Pat was Added
-They are player number 2
-Sue was Added
-They are player number 3
+Game started
+
 Chet is the current player
 They have rolled a 3
 Chet's new location is 3
@@ -1996,12 +1938,8 @@ Sports Question 3
 Answer was correct!!!!
 Pat now has 6 Gold Coins.
 
-Chet was Added
-They are player number 1
-Pat was Added
-They are player number 2
-Sue was Added
-They are player number 3
+Game started
+
 Chet is the current player
 They have rolled a 5
 Chet's new location is 5
@@ -2120,12 +2058,8 @@ Rock Question 5
 Answer was correct!!!!
 Pat now has 6 Gold Coins.
 
-Chet was Added
-They are player number 1
-Pat was Added
-They are player number 2
-Sue was Added
-They are player number 3
+Game started
+
 Chet is the current player
 They have rolled a 5
 Chet's new location is 5
@@ -2253,12 +2187,8 @@ Sports Question 3
 Answer was correct!!!!
 Chet now has 6 Gold Coins.
 
-Chet was Added
-They are player number 1
-Pat was Added
-They are player number 2
-Sue was Added
-They are player number 3
+Game started
+
 Chet is the current player
 They have rolled a 5
 Chet's new location is 5
@@ -2373,12 +2303,8 @@ Sports Question 4
 Answer was correct!!!!
 Pat now has 6 Gold Coins.
 
-Chet was Added
-They are player number 1
-Pat was Added
-They are player number 2
-Sue was Added
-They are player number 3
+Game started
+
 Chet is the current player
 They have rolled a 2
 Chet's new location is 2
