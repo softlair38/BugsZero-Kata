@@ -15,6 +15,8 @@ namespace Trivia
 
 		public bool InPenaltyBox { get; private set; }
 
+		public int Number { get; private set; }
+
 		private Game Game { get; set; }
 
 		internal Player(PlayerInfo playerInfo, IList<Place> places, Purse purse)
@@ -24,9 +26,10 @@ namespace Trivia
 			Purse = purse;
 		}
 
-		internal void ResetGame(Game game)
+		internal void ResetGame(Game game, int number)
 		{
 			Game = game;
+			Number = number;
 			Places.Reset();
 			Purse.Reset();
 			InPenaltyBox = false;

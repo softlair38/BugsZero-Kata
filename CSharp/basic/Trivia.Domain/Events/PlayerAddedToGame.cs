@@ -4,13 +4,11 @@
 	{
 		public Game Game { get; }
 		public Player Player { get; }
-		public int NumPlayer { get; }
 
-		internal PlayerAddedToGame(Game game, Player player, int numPlayer)
+		internal PlayerAddedToGame(Game game, Player player)
 		{
 			Game = game;
 			Player = player;
-			NumPlayer = numPlayer;
 		}
 	}
 }

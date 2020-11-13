@@ -30,7 +30,7 @@ namespace Trivia
 			{
 				case PlayerAddedToGame playerAddedToGame:
 					Console.WriteLine($"{playerAddedToGame.Player} was Added");
-					Console.WriteLine($"They are player number {playerAddedToGame.NumPlayer}");
+					Console.WriteLine($"They are player number {playerAddedToGame.Player.Number}");
 					break;
 
 				case PlayerRollRequested playerRollRequested:

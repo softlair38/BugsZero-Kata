@@ -50,8 +50,8 @@ namespace Trivia
 
 		private void Add(Player player, int number)
 		{
-			player.ResetGame(this);
-			Domains.RaiseEvent(new PlayerAddedToGame(this, player, number));
+			player.ResetGame(this, number);
+			Domains.RaiseEvent(new PlayerAddedToGame(this, player));
 		}
 
 		internal void AskQuestion(Category category)
