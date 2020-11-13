@@ -11,8 +11,8 @@ namespace Trivia
 
 		private const ushort MinPlayers = 2;
 		private const ushort MaxPlayers = 6;
-		internal static ushort NbPurseToWin = 6;
-		internal static ushort NbPlaces = 12;
+		internal const ushort NbPurseToWin = 6;
+		internal const ushort NbPlaces = 12;
 
 		private Questions Questions { get; } = new Questions();
 

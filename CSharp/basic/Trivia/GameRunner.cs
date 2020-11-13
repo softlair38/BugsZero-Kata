@@ -3,22 +3,31 @@ using Trivia.Domain.Events;
 
 namespace Trivia
 {
-	public static class GameRunner
+	public class GameRunner : IDisposable
 	{
 		private static readonly Random Rand = new Random(new Guid("1BEFC143-CBA2-4F3D-9219-F2220F792D28").GetHashCode());
 
 		public static void Main(string[] args)
 		{
-			Domains.OnDomainTriggered += OnDomainTriggered;
-
-			Game.StartNewGame(new Player("Chet"), new Player("Pat"), new Player("Sue"));
-
-			Domains.OnDomainTriggered -= OnDomainTriggered;
+			using (var gameRunner = new GameRunner())
+			{
+				gameRunner.Launch();
+			}
 		}
 
-		private static int _r2;
+		private GameRunner()
+		{
+			Domains.OnDomainTriggered += OnDomainTriggered;
+		}
 
-		private static void OnDomainTriggered(IDomainBase domainEvent)
+		private void Launch()
+		{
+			Game.StartNewGame(new Player("Chet"), new Player("Pat"), new Player("Sue"));
+		}
+
+		private int _r2;
+
+		private void OnDomainTriggered(IDomainBase domainEvent)
 		{
 			switch (domainEvent)
 			{
@@ -63,6 +72,11 @@ namespace Trivia
 					Console.WriteLine($"{playerGoodResponseSended.Player} now has {playerGoodResponseSended.Player.Purses} Gold Coins.");
 					break;
 			}
+		}
+
+		public void Dispose()
+		{
+			Domains.OnDomainTriggered -= OnDomainTriggered;
 		}
 	}
 }
