@@ -57,6 +57,7 @@
     <Compile Include="Events\PlayerWentToPenaltyBox.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Events\Base\IDomainEvent.cs" />
+    <Compile Include="GameSettings.cs" />
     <Compile Include="Place.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Events\PlayerRollRequested.cs" />

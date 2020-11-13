@@ -7,6 +7,8 @@ namespace Trivia
 	{
 		private static readonly Random Rand = new Random(new Guid("1BEFC143-CBA2-4F3D-9219-F2220F792D28").GetHashCode());
 
+		private static GameSettings GameSettings { get; } = new GameSettings(2, 6, 6, 12);
+
 		public static void Main(string[] args)
 		{
 			using (var gameRunner = new GameRunner())
@@ -22,7 +24,7 @@ namespace Trivia
 
 		private void Launch()
 		{
-			Game.StartNewGame(
+			Game.StartNewGame(GameSettings,
 				new PlayerInfo("Chet", 14),
 				new PlayerInfo("Pat", 16),
 				new PlayerInfo("Sue", 15));

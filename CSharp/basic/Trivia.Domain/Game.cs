@@ -14,33 +14,28 @@ namespace Trivia
 
 		private Player CurrentPlayer => Players.Current;
 
-		private const ushort MinPlayers = 2;
-		private const ushort MaxPlayers = 6;
-		private const ushort NbPurseToWin = 6;
-		private const ushort NbPlaces = 12;
-
-		public static void StartNewGame(params PlayerInfo[] playerInfos)
+		public static void StartNewGame(GameSettings settings, params PlayerInfo[] playerInfos)
 		{
-			if (playerInfos == null || playerInfos.Length < MinPlayers || playerInfos.Length > MaxPlayers)
+			if (playerInfos == null || playerInfos.Length < settings.MinPlayers || playerInfos.Length > settings.MaxPlayers)
 			{
-				Domains.RaiseEvent(new GameErrorOccured($"Le nombre de joueur doit être compris entre {MinPlayers} et {MaxPlayers}"));
+				Domains.RaiseEvent(new GameErrorOccured($"Le nombre de joueur doit être compris entre {settings.MinPlayers} et {settings.MaxPlayers}"));
 				return;
 			}
 
-			var game = new Game(playerInfos);
+			var game = new Game(settings, playerInfos);
 
 			Domains.RaiseEvent(new GameStarted(game));
 			Domains.RaiseRequest(new PlayerRollRequested(game, game.CurrentPlayer));
 		}
 
-		private Game(params PlayerInfo[] playerInfos)
+		private Game(GameSettings settings, params PlayerInfo[] playerInfos)
 		{
-			Places = Enumerable.Range(0, NbPlaces)
+			Places = Enumerable.Range(0, settings.NbPlaces)
 				.Select(place => new Place((Category)(place % Questions.NbCategories), place))
 				.ToList();
 
 			List<Player> players = playerInfos
-				.Select(p => new Player(p, Places, new Purse(NbPurseToWin)))
+				.Select(p => new Player(p, Places, new Purse(settings.NbPurseToWin)))
 				.ToList();
 
 			int number = 0;
