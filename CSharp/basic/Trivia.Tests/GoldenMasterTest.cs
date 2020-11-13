@@ -25,7 +25,7 @@ namespace Trivia.Tests
 					for (int i = 0; i < 20; i++)
 					{
 						Console.WriteLine();
-						GameRunner.Main(null);
+						Program.Main(null);
 					}
 
 					Console.SetOut(oldOut);

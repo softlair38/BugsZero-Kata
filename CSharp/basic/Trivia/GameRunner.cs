@@ -7,22 +7,14 @@ namespace Trivia
 	{
 		private static readonly Random Rand = new Random(new Guid("1BEFC143-CBA2-4F3D-9219-F2220F792D28").GetHashCode());
 
-		private static GameSettings GameSettings { get; } = new GameSettings(2, 6, 6, 12);
+		private GameSettings GameSettings { get; } = new GameSettings(2, 6, 6, 12);
 
-		public static void Main(string[] args)
-		{
-			using (var gameRunner = new GameRunner())
-			{
-				gameRunner.Launch();
-			}
-		}
-
-		private GameRunner()
+		internal GameRunner()
 		{
 			Domains.OnDomainTriggered += OnDomainTriggered;
 		}
 
-		private void Launch()
+		internal void Launch()
 		{
 			Game.StartNewGame(GameSettings,
 				new PlayerInfo("Chet", 14),
