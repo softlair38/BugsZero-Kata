@@ -1,6 +1,6 @@
 ﻿namespace Trivia
 {
-	public class Place
+	public readonly struct Place
 	{
 		public Category Category { get; }
 

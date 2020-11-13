@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Trivia
 {
-	public class RollingList<T>
+	internal class RollingList<T>
 	{
 		private IList<T> InternalValues { get; }
 
