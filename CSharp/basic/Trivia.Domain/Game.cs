@@ -10,7 +10,7 @@ namespace Trivia
 
 		private RollingList<Player> Players { get; }
 
-		private IList<Place> Places { get; }
+		private Places Places { get; }
 
 		private Player CurrentPlayer => Players.Current;
 
@@ -30,9 +30,7 @@ namespace Trivia
 
 		private Game(GameSettings settings, params PlayerInfo[] playerInfos)
 		{
-			Places = Enumerable.Range(0, settings.NbPlaces.Value)
-				.Select(place => new Place((Category)(place % Questions.NbCategories), new Location(place)))
-				.ToList();
+			Places = new Places(settings.NbPlaces, Questions);
 
 			List<Player> players = playerInfos
 				.Select(p => new Player(p, Places, new Score(settings.NbCoinToWin)))

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Trivia.Domain.Events;
+﻿using Trivia.Domain.Events;
 
 namespace Trivia
 {
@@ -19,10 +18,10 @@ namespace Trivia
 
 		private Game Game { get; set; }
 
-		internal Player(PlayerInfo playerInfo, IList<Place> places, Score score)
+		internal Player(PlayerInfo playerInfo, Places places, Score score)
 		{
 			Info = playerInfo;
-			Places = new RollingList<Place>(places);
+			Places = new RollingList<Place>(places.Values);
 			Score = score;
 		}
 

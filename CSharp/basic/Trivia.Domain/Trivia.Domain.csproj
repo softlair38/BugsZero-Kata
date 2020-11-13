@@ -42,6 +42,7 @@
     <Compile Include="ValueType\MinPlayerSetting.cs" />
     <Compile Include="ValueType\NbCoinToWinSetting.cs" />
     <Compile Include="ValueType\NbPlacesSetting.cs" />
+    <Compile Include="ValueType\Places.cs" />
     <Compile Include="ValueType\Question.cs" />
     <Compile Include="ValueType\Category.cs" />
     <Compile Include="Events\Base\Domains.cs" />
