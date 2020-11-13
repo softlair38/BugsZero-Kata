@@ -2,7 +2,7 @@
 {
 	public readonly struct Location
 	{
-		public int Number { get; }
+		private int Number { get; }
 
 		public Location(int number)
 		{

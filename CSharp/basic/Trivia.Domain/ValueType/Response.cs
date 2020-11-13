@@ -2,11 +2,16 @@
 {
 	public readonly struct Response
 	{
-		internal int Description { get; }
+		private int Description { get; }
 
 		public Response(int description)
 		{
 			Description = description;
+		}
+
+		public override string ToString()
+		{
+			return Description.ToString();
 		}
 	}
 }

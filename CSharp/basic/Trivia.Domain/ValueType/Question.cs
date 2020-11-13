@@ -6,7 +6,7 @@
 
 		private Response GoodResponseExpected { get; }
 
-		internal bool IsGoodResponse(Response response) => response.Description == GoodResponseExpected.Description;
+		internal bool IsGoodResponse(Response response) => response.Equals(GoodResponseExpected);
 
 		public Question(string description, Response goodResponseExpected)
 		{
