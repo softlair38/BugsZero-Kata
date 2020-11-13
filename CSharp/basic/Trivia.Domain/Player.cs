@@ -33,25 +33,19 @@ namespace Trivia
 
 		internal void Roll(Roll roll)
 		{
+			if (InPenaltyBox && roll.IsGettingOutOfPenaltyBox)
+				SetNotInPenaltyBox();
+
 			if (InPenaltyBox)
-				if (roll.IsGettingOutOfPenaltyBox)
-				{
-					SetNotInPenaltyBox();
-				}
-				else
-				{
-					Domains.RaiseEvent(new PlayerStayedInPenaltyBox(Game, this));
-					Game.NextPlayer();
-					return;
-				}
-
-			Move(roll);
-			Game.AskQuestion();
-		}
-
-		private void Move(Roll roll)
-		{
-			Places.Next(roll.Number);
+			{
+				Domains.RaiseEvent(new PlayerStayedInPenaltyBox(Game, this));
+				Game.NextPlayer();
+			}
+			else
+			{
+				Places.Next(roll.Number);
+				Game.AskQuestion(Place.Category);
+			}
 		}
 
 		internal void WasCorrectlyAnswered()
