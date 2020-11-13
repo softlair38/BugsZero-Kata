@@ -70,7 +70,7 @@ namespace Trivia
 
 				case PlayerGoodResponseSended playerGoodResponseSended:
 					Console.WriteLine("Answer was correct!!!!");
-					Console.WriteLine($"{playerGoodResponseSended.Player} now has {playerGoodResponseSended.Player.Score.Coin} Gold Coins.");
+					Console.WriteLine($"{playerGoodResponseSended.Player} now has {playerGoodResponseSended.Player.Score} Gold Coins.");
 					break;
 			}
 		}

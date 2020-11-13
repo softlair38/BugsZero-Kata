@@ -2,9 +2,9 @@
 {
 	public class Score
 	{
-		public int Coin { get; private set; }
+		private int Coin { get; set; }
 
-		public NbCoinToWinSetting NbCoinToWin { get; }
+		private NbCoinToWinSetting NbCoinToWin { get; }
 
 		public bool HasWin => Coin == NbCoinToWin.Value;
 
@@ -21,6 +21,11 @@
 		internal void Reset()
 		{
 			Coin = 0;
+		}
+
+		public override string ToString()
+		{
+			return Coin.ToString();
 		}
 	}
 }
