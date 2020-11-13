@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Trivia.Domain.Events;
 
@@ -7,34 +6,40 @@ namespace Trivia
 {
 	public class Game
 	{
+		private Questions<Category> Questions { get; }
+
 		private List<Player> Players { get; }
+		private Player CurrentPlayer { get; set; }
 
 		private const ushort MinPlayers = 2;
 		private const ushort MaxPlayers = 6;
 		internal const ushort NbPurseToWin = 6;
 		internal const ushort NbPlaces = 12;
 
-		private Questions<Category> Questions { get; } = new Questions<Category>();
-
-		private Player CurrentPlayer { get; set; }
-
 		public static void StartNewGame(params Player[] players)
 		{
+			if (players == null || players.Length < MinPlayers || players.Length > MaxPlayers)
+			{
+				Domains.RaiseEvent(new GameErrorOccured($"Le nombre de joueur doit être compris entre {MinPlayers} et {MaxPlayers}"));
+				return;
+			}
+
 			var game = new Game(players);
+
 			Domains.RaiseEvent(new GameStarted(game));
 			Domains.RaiseRequest(new PlayerRollRequested(game, game.CurrentPlayer));
 		}
 
 		private Game(params Player[] players)
 		{
-			if (players == null || players.Length < MinPlayers || players.Length > MaxPlayers)
-				throw new InvalidOperationException($"Le nombre de joueur doit être compris entre {MinPlayers} et {MaxPlayers}");
+			Questions = new Questions<Category>();
 
 			Players = new List<Player>();
 			foreach (Player player in players)
 			{
 				Add(player);
 			}
+
 			CurrentPlayer = Players.First();
 		}
 
