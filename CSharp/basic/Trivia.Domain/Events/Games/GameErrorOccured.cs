@@ -1,12 +1,10 @@
 ﻿namespace Trivia.Domain.Events
 {
-	public readonly struct GameErrorOccured : IDomainEvent
+	public record GameErrorOccured : IDomainEvent
 	{
-		public string Reason { get; }
+		public string Reason { get; init; }
 
 		internal GameErrorOccured(string reason)
-		{
-			Reason = reason;
-		}
+			=> (Reason) = (reason);
 	}
 }

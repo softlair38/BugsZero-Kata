@@ -1,14 +1,7 @@
 ﻿namespace Trivia
 {
-	public readonly struct Roll
+	public record Roll(int Number)
 	{
-		internal int Number { get; }
-
-		public Roll(int nb)
-		{
-			Number = nb;
-		}
-
 		internal bool IsGettingOutOfPenaltyBox => Number % 2 != 0;
 
 		public override string ToString()

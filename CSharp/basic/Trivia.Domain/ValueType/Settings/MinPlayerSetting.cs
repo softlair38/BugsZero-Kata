@@ -2,7 +2,7 @@
 
 namespace Trivia
 {
-	public readonly struct MinPlayerSetting
+	public record MinPlayerSetting
 	{
 		internal ushort Value { get; }
 

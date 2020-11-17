@@ -1,10 +1,11 @@
-﻿using Trivia.Domain.Events;
+﻿using System.Linq;
+using Trivia.Domain.Events;
 
 namespace Trivia
 {
 	public class Game
 	{
-		internal Questions<Category> Questions { get; } = new Questions<Category>();
+		internal Questions<Category> Questions { get; } = new();
 
 		internal Players Players { get; }
 
@@ -16,13 +17,16 @@ namespace Trivia
 				return;
 			}
 
-			var game = new Game(settings, playerInfos);
+			Game game = new(settings, playerInfos);
 			game.Start();
 		}
 
 		private Game(GameSettings settings, params PlayerInfo[] playerInfos)
 		{
-			var places = new Places(settings.NbPlaces, Questions);
+			var values = Enumerable.Range(0, settings.NbPlaces.Value)
+				.Select(place => new Place((Category)(place % Questions.NbCategories), new Location(place)))
+				.ToList();
+			Places places = new(values);
 			Players = new Players(playerInfos, settings.NbCoinToWin, places, this);
 		}
 

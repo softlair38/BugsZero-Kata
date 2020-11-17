@@ -2,7 +2,7 @@
 
 namespace Trivia
 {
-	public readonly struct NbCoinToWinSetting
+	public record NbCoinToWinSetting
 	{
 		internal ushort Value { get; }
 

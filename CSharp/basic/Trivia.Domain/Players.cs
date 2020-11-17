@@ -15,10 +15,10 @@ namespace Trivia
 		{
 			Game = game;
 
-			var list = new List<Player>();
+			List<Player> list = new();
 			foreach (PlayerInfo playerInfo in playerInfos)
 			{
-				var player = new Player(playerInfo, places, new Score(nbCoinToWin), list.Count + 1, Game);
+				Player player = new(playerInfo, places, new Score(nbCoinToWin), list.Count + 1, Game);
 				list.Add(player);
 				Domains.RaiseEvent(new PlayerAddedToGame(game, player));
 			}

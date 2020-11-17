@@ -5,11 +5,11 @@ namespace Trivia
 {
 	public class GameRunner : IDisposable
 	{
-		private static readonly Random Rand = new Random(new Guid("1BEFC143-CBA2-4F3D-9219-F2220F792D28").GetHashCode());
+		private static readonly Random Rand = new(new Guid("1BEFC143-CBA2-4F3D-9219-F2220F792D28").GetHashCode());
 
 		private Game CurrentGame { get; set; }
 
-		private GameSettings GameSettings { get; } = new GameSettings(
+		private GameSettings GameSettings { get; } = new(
 			new MinPlayerSetting(2),
 			new MaxPlayerSetting(6),
 			new NbCoinToWinSetting(6),

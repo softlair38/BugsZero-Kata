@@ -1,14 +1,11 @@
 ﻿namespace Trivia.Domain.Events
 {
-	public readonly struct PlayerWentToPenaltyBox : IDomainEvent
+	public record PlayerWentToPenaltyBox : IDomainEvent
 	{
-		public Game Game { get; }
-		public Player Player { get; }
+		public Game Game { get; init; }
+		public Player Player { get; init; }
 
 		internal PlayerWentToPenaltyBox(Game game, Player player)
-		{
-			Game = game;
-			Player = player;
-		}
+			=> (Game, Player) = (game, player);
 	}
 }

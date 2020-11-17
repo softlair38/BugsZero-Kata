@@ -1,17 +1,13 @@
 ﻿namespace Trivia.Domain.Events
 {
-	public readonly struct PlayerResponseRequested : IDomainRequest
+	public record PlayerResponseRequested : IDomainRequest
 	{
-		public Game Game { get; }
-		public Player Player { get; }
-		public Question Question { get; }
+		public Game Game { get; init; }
+		public Player Player { get; init; }
+		public Question Question { get; init; }
 
 		internal PlayerResponseRequested(Game game, Player player, Question question)
-		{
-			Game = game;
-			Player = player;
-			Question = question;
-		}
+			=> (Game, Player, Question) = (game, player, question);
 
 		public void Response(Response response)
 		{

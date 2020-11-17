@@ -15,14 +15,14 @@ namespace Trivia.Tests
 			if (File.Exists(outputPath))
 				File.Delete(outputPath);
 
-			using (var fileStream = new FileStream(outputPath, FileMode.CreateNew, FileAccess.Write))
+			using (FileStream fileStream = new(outputPath, FileMode.CreateNew, FileAccess.Write))
 			{
-				using (var streamWriter = new StreamWriter(fileStream))
+				using (StreamWriter streamWriter = new(fileStream))
 				{
 					TextWriter oldOut = Console.Out;
 					Console.SetOut(streamWriter);
 
-					using (var gameRunner = new GameRunner())
+					using (GameRunner gameRunner = new())
 					{
 						for (int i = 0; i < 20; i++)
 						{

@@ -1,6 +1,6 @@
 ﻿namespace Trivia
 {
-	public readonly struct GameSettings
+	public record GameSettings
 	{
 		public MinPlayerSetting MinPlayers { get; }
 		public MaxPlayerSetting MaxPlayers { get; }
