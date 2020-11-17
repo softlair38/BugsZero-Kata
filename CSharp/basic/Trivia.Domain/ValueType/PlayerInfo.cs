@@ -1,6 +1,6 @@
 ﻿namespace Trivia
 {
-	public class PlayerInfo
+	public readonly struct PlayerInfo
 	{
 		public string Name { get; }
 

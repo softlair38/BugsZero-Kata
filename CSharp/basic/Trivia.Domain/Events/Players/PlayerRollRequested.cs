@@ -2,14 +2,14 @@
 {
 	public readonly struct PlayerRollRequested : IDomainRequest
 	{
+		public Game Game { get; }
+		public Player Player { get; }
+
 		internal PlayerRollRequested(Game game, Player player)
 		{
 			Game = game;
 			Player = player;
 		}
-
-		private Game Game { get; }
-		public Player Player { get; }
 
 		public void Response(Roll roll)
 		{
