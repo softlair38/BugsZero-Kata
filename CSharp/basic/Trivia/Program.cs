@@ -1,2 +1,2 @@
-﻿using (Trivia.GameRunner gameRunner = new())
-	gameRunner.Launch();
+﻿using Trivia.GameRunner gameRunner = new();
+gameRunner.Launch();
