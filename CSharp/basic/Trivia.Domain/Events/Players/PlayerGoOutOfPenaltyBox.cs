@@ -2,8 +2,8 @@
 {
 	public record PlayerGoOutOfPenaltyBox : IDomainEvent
 	{
-		public Game Game { get; init; }
-		public Player Player { get; init; }
+		public Game Game { get; }
+		public Player Player { get; }
 
 		internal PlayerGoOutOfPenaltyBox(Game game, Player player)
 			=> (Game, Player) = (game, player);

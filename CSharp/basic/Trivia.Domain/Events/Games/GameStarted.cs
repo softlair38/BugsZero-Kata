@@ -2,7 +2,7 @@
 {
 	public record GameStarted : IDomainEvent
 	{
-		public Game Game { get; init; }
+		public Game Game { get; }
 
 
 		internal GameStarted(Game game)
