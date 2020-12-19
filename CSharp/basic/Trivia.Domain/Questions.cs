@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Trivia.Domain.ValueType;
 
-namespace Trivia
+namespace Trivia.Domain
 {
 	internal class Questions<T> where T : struct
 	{

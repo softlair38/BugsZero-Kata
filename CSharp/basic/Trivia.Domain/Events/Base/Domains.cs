@@ -1,4 +1,4 @@
-﻿namespace Trivia.Domain.Events
+﻿namespace Trivia.Domain.Events.Base
 {
 	public static class Domains
 	{

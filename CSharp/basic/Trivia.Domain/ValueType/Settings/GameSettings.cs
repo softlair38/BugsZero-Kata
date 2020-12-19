@@ -1,4 +1,4 @@
-﻿namespace Trivia
+﻿namespace Trivia.Domain.ValueType.Settings
 {
 	public record GameSettings
 	{

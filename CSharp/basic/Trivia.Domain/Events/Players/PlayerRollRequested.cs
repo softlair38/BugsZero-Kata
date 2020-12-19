@@ -1,4 +1,7 @@
-﻿namespace Trivia.Domain.Events
+﻿using Trivia.Domain.Events.Base;
+using Trivia.Domain.ValueType;
+
+namespace Trivia.Domain.Events.Players
 {
 	public record PlayerRollRequested : IDomainRequest
 	{

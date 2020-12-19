@@ -1,7 +1,11 @@
 ﻿using System.Collections.Generic;
-using Trivia.Domain.Events;
+using Trivia.Domain.Events.Base;
+using Trivia.Domain.Events.Players;
+using Trivia.Domain.Tools;
+using Trivia.Domain.ValueType;
+using Trivia.Domain.ValueType.Settings;
 
-namespace Trivia
+namespace Trivia.Domain
 {
 	internal class Players
 	{

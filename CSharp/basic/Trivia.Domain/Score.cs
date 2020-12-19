@@ -1,4 +1,6 @@
-﻿namespace Trivia
+﻿using Trivia.Domain.ValueType.Settings;
+
+namespace Trivia.Domain
 {
 	public class Score
 	{

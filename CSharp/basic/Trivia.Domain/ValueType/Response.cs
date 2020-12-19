@@ -1,4 +1,4 @@
-﻿namespace Trivia
+﻿namespace Trivia.Domain.ValueType
 {
 	public record Response(int Description)
 	{

@@ -1,6 +1,10 @@
-﻿using Trivia.Domain.Events;
+﻿using Trivia.Domain.Events.Base;
+using Trivia.Domain.Events.Games;
+using Trivia.Domain.Events.Players;
+using Trivia.Domain.Tools;
+using Trivia.Domain.ValueType;
 
-namespace Trivia
+namespace Trivia.Domain
 {
 	public class Player
 	{

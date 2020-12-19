@@ -1,4 +1,6 @@
-﻿namespace Trivia.Domain.Events
+﻿using Trivia.Domain.Events.Base;
+
+namespace Trivia.Domain.Events.Players
 {
 	public record PlayerWentToPenaltyBox : IDomainEvent
 	{

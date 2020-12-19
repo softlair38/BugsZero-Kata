@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Trivia
+namespace Trivia.Domain.Tools
 {
 	internal class RollingList<T>
 	{

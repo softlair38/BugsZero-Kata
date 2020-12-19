@@ -1,5 +1,10 @@
 ﻿using System;
-using Trivia.Domain.Events;
+using Trivia.Domain;
+using Trivia.Domain.Events.Base;
+using Trivia.Domain.Events.Games;
+using Trivia.Domain.Events.Players;
+using Trivia.Domain.ValueType;
+using Trivia.Domain.ValueType.Settings;
 
 namespace Trivia
 {

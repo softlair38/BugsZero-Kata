@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Trivia
+namespace Trivia.Domain.ValueType
 {
 	internal record Places(IList<Place> Values);
 }
