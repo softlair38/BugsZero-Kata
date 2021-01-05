@@ -2,7 +2,7 @@
 {
 	public static class Domains
 	{
-		public static event DomainTriggered OnDomainTriggered;
+		public static event DomainTriggered? OnDomainTriggered;
 
 		internal static void RaiseEvent(IDomainEvent domainEvent)
 		{

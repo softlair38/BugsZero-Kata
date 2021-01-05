@@ -9,6 +9,8 @@ namespace Trivia.Domain.Tools
 
 		public T Current { get; private set; }
 
+		private readonly object _lockCurrent = new();
+
 		public RollingList(IList<T> values) : this(values, values.First())
 		{ }
 
@@ -20,7 +22,7 @@ namespace Trivia.Domain.Tools
 
 		public void Next(int step = 1)
 		{
-			lock (Current)
+			lock (_lockCurrent)
 			{
 				int i = InternalValues.IndexOf(Current) + step;
 
@@ -33,7 +35,7 @@ namespace Trivia.Domain.Tools
 
 		public void Reset()
 		{
-			lock (Current)
+			lock (_lockCurrent)
 				Current = InternalValues.First();
 		}
 	}

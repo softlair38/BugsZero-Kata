@@ -12,7 +12,7 @@ namespace Trivia
 	{
 		private static readonly Random Rand = new(new Guid("1BEFC143-CBA2-4F3D-9219-F2220F792D28").GetHashCode());
 
-		private Game CurrentGame { get; set; }
+		private Game? CurrentGame { get; set; }
 
 		private GameSettings GameSettings { get; } = new(
 			new MinPlayerSetting(2),
@@ -83,7 +83,7 @@ namespace Trivia
 					Console.WriteLine($"{playerGoOutOfPenaltyBox.Player} is getting out of the penalty box");
 					break;
 
-				case PlayerBadResponseSended playerBadResponseSended:
+				case PlayerBadResponseSended _:
 					Console.WriteLine("Question was incorrectly answered");
 					break;
 
@@ -97,6 +97,7 @@ namespace Trivia
 		public void Dispose()
 		{
 			Domains.OnDomainTriggered -= OnDomainTriggered;
+			GC.SuppressFinalize(this);
 		}
 	}
 }
