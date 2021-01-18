@@ -29,6 +29,8 @@ namespace Trivia.Domain
 			Score = score;
 			Number = number;
 			Game = game;
+
+			Domains.RaiseEvent(new PlayerAddedToGame(game, this));
 		}
 
 		internal void Reset()

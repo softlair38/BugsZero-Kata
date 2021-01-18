@@ -8,7 +8,7 @@ namespace Trivia.Domain
 	{
 		private Dictionary<T, Queue<Question>> DicoQuestions { get; }
 
-		private int _index;
+		private int Index { get; set; }
 
 		internal int NbCategories { get; }
 
@@ -25,9 +25,9 @@ namespace Trivia.Domain
 		private void FillAll()
 		{
 			foreach (T category in Enum.GetValues(typeof(T)))
-				Fill(category, _index, _index + 5);
+				Fill(category, Index, Index + 5);
 
-			_index += 5;
+			Index += 5;
 		}
 
 		private void Fill(T category, int start, int end)
@@ -49,11 +49,9 @@ namespace Trivia.Domain
 		internal void Reset()
 		{
 			foreach (Queue<Question> questions in DicoQuestions.Values)
-			{
 				questions.Clear();
-			}
 
-			_index = 0;
+			Index = 0;
 		}
 	}
 }

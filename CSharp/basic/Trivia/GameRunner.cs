@@ -27,16 +27,17 @@ namespace Trivia
 
 		public void Launch()
 		{
-			if (CurrentGame != null)
+			if (CurrentGame == null)
 			{
-				CurrentGame.Restart();
+				Game.StartNewGame(GameSettings,
+					new PlayerInfo("Chet", 14),
+					new PlayerInfo("Pat", 16),
+					new PlayerInfo("Sue", 15));
+
 				return;
 			}
 
-			Game.StartNewGame(GameSettings,
-				new PlayerInfo("Chet", 14),
-				new PlayerInfo("Pat", 16),
-				new PlayerInfo("Sue", 15));
+			CurrentGame.Restart();
 		}
 
 		private int _r2;

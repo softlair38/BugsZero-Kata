@@ -11,9 +11,9 @@ namespace Trivia.Domain
 	{
 		private Game Game { get; }
 
-		private RollingList<Player> Values { get; }
+		private RollingList<Player> RollingPlayers { get; }
 
-		internal Player Current => Values.Current;
+		internal Player Current => RollingPlayers.Current;
 
 		internal Players(IList<PlayerInfo> playerInfos, NbCoinToWinSetting nbCoinToWin, Places places, Game game)
 		{
@@ -21,28 +21,23 @@ namespace Trivia.Domain
 
 			List<Player> list = new();
 			foreach (PlayerInfo playerInfo in playerInfos)
-			{
-				Player player = new(playerInfo, places, new Score(nbCoinToWin), list.Count + 1, Game);
-				list.Add(player);
-				Domains.RaiseEvent(new PlayerAddedToGame(game, player));
-			}
+				list.Add(new(playerInfo, places, new Score(nbCoinToWin), list.Count + 1, Game));
 
-			Values = new RollingList<Player>(list);
+			RollingPlayers = new RollingList<Player>(list);
 		}
 
 		internal void GoToNextPlayer()
 		{
-			Values.Next();
+			RollingPlayers.Next();
 			Domains.RaiseRequest(new PlayerRollRequested(Game, Current));
 		}
 
 		internal void Reset()
 		{
-			Values.Reset();
-			foreach (Player player in Values.InternalValues)
-			{
+			RollingPlayers.Reset();
+
+			foreach (Player player in RollingPlayers.InternalValues)
 				player.Reset();
-			}
 		}
 	}
 }

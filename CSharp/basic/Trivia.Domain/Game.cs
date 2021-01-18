@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Trivia.Domain.Events.Base;
 using Trivia.Domain.Events.Games;
 using Trivia.Domain.Events.Players;
@@ -15,7 +16,7 @@ namespace Trivia.Domain
 
 		public static void StartNewGame(GameSettings settings, params PlayerInfo[] playerInfos)
 		{
-			if (playerInfos == null || playerInfos.Length < settings.MinPlayers.Value || playerInfos.Length > settings.MaxPlayers.Value)
+			if (playerInfos.Length < settings.MinPlayers.Value || playerInfos.Length > settings.MaxPlayers.Value)
 			{
 				Domains.RaiseEvent(new GameErrorOccured($"Le nombre de joueur doit être compris entre {settings.MinPlayers} et {settings.MaxPlayers}"));
 				return;
@@ -27,10 +28,11 @@ namespace Trivia.Domain
 
 		private Game(GameSettings settings, params PlayerInfo[] playerInfos)
 		{
-			var values = Enumerable.Range(0, settings.NbPlaces.Value)
+			List<Place> values = Enumerable.Range(0, settings.NbPlaces.Value)
 				.Select(place => new Place((Category)(place % Questions.NbCategories), new Location(place)))
 				.ToList();
 			Places places = new(values);
+
 			Players = new Players(playerInfos, settings.NbCoinToWin, places, this);
 		}
 
