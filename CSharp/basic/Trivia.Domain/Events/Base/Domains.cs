@@ -9,7 +9,7 @@
 			OnDomainTriggered?.Invoke(domainEvent);
 		}
 
-		public static void RaiseRequest(IDomainRequest domainRequest)
+		internal static void RaiseRequest(IDomainRequest domainRequest)
 		{
 			OnDomainTriggered?.Invoke(domainRequest);
 		}
