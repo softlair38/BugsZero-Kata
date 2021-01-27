@@ -1,0 +1,16 @@
+﻿
+Il faut sauver le soldat legacy
+
+Talk Refacto (1ere partie) par Jérémy Lair 
+https://github.com/softlair38/BugsZero-Kata/tree/task/training
+@SoftLair
+
+
+Talk Test Specflow (2e partie) par Kevin Navarro
+https://github.com/kenavarr/BugsZero-Kata/tree/SecondRun
+@NAVARROKvin1
+
+
+BugZero-Kata (Code Base du talk) de Johan Martisson
+https://github.com/martinsson/BugsZero-Kata
+
