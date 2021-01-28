@@ -3,7 +3,7 @@ using Trivia.Domain.Events.Base;
 
 namespace Trivia.Domain
 {
-	#region 1a POCO
+	#region 1a Rassembler les données : POCO
 	public class Player1
 	{
 		public string Name { get; set; }
@@ -12,7 +12,7 @@ namespace Trivia.Domain
 	}
 	#endregion
 
-	#region 1b type primitif : string int bool ...
+	#region 1b Rassembler les données : type primitif : string int bool ...
 	public class Player2
 	{
 		public Name Name { get; set; }
@@ -25,7 +25,7 @@ namespace Trivia.Domain
 	public record Coin(int Value);
 	#endregion
 
-	#region 2 private setters / ctor
+	#region 2 Protéger / sécuriser : private setters / ctor
 	public class Player3
 	{
 		public static Player3 BuildNewOne(Name name, Coin coin)
@@ -61,7 +61,7 @@ namespace Trivia.Domain
 	}
 	#endregion
 
-	#region 3 Evenement :  public => private / internal => donner du sens métier
+	#region 3 Informer plutot que demander :  public => private / internal => donner du sens métier => envoyer événement plutot que retour de méthode
 	public class Player4
 	{
 		public static void BuildNewOne(Name name, Coin coin)
