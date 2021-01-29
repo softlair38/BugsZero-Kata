@@ -7,6 +7,6 @@ namespace Trivia.Domain.Events.Games
 		public string Reason { get; }
 
 		internal GameErrorOccured(string reason)
-			=> (Reason) = (reason);
+			=> Reason = reason;
 	}
 }

@@ -29,7 +29,7 @@ namespace Trivia.Domain
 		internal void GoToNextPlayer()
 		{
 			RollingPlayers.Next();
-			Domains.RaiseRequest(new PlayerRollRequested(Game, Current));
+			Domains.RaiseRequest(new PlayerRollRequested(Current));
 		}
 
 		internal void Reset()

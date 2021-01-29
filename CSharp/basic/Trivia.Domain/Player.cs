@@ -30,7 +30,7 @@ namespace Trivia.Domain
 			Number = number;
 			Game = game;
 
-			Domains.RaiseEvent(new PlayerAddedToGame(game, this));
+			Domains.RaiseEvent(new PlayerAddedToGame(this));
 		}
 
 		internal void Reset()
@@ -47,7 +47,7 @@ namespace Trivia.Domain
 
 			if (InPenaltyBox)
 			{
-				Domains.RaiseEvent(new PlayerStayedInPenaltyBox(Game, this));
+				Domains.RaiseEvent(new PlayerStayedInPenaltyBox(this));
 				Game.Players.GoToNextPlayer();
 			}
 			else
@@ -59,13 +59,13 @@ namespace Trivia.Domain
 
 		private void AskQuestion(Category category)
 		{
-			Domains.RaiseRequest(new PlayerResponseRequested(Game, this, Game.Questions.GetNewOne(category)));
+			Domains.RaiseRequest(new PlayerResponseRequested(this, Game.Questions.GetNewOne(category)));
 		}
 
 		internal void WasCorrectlyAnswered()
 		{
 			Score.WinCoin(1);
-			Domains.RaiseEvent(new PlayerGoodResponseSended(Game, this));
+			Domains.RaiseEvent(new PlayerGoodResponseSended(this));
 
 			if (Score.HasWin)
 				Domains.RaiseEvent(new GameEnded(Game));
@@ -75,17 +75,17 @@ namespace Trivia.Domain
 
 		internal void WrongAnswer()
 		{
-			Domains.RaiseEvent(new PlayerBadResponseSended(Game, this));
+			Domains.RaiseEvent(new PlayerBadResponseSended(this));
 			InPenaltyBox = true;
 
-			Domains.RaiseEvent(new PlayerWentToPenaltyBox(Game, this));
+			Domains.RaiseEvent(new PlayerWentToPenaltyBox(this));
 			Game.Players.GoToNextPlayer();
 		}
 
 		private void SetNotInPenaltyBox()
 		{
 			InPenaltyBox = false;
-			Domains.RaiseEvent(new PlayerGoOutOfPenaltyBox(Game, this));
+			Domains.RaiseEvent(new PlayerGoOutOfPenaltyBox(this));
 		}
 
 		public override string ToString()

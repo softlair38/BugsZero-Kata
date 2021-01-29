@@ -47,7 +47,7 @@ namespace Trivia.Domain
 		private void Start()
 		{
 			Domains.RaiseEvent(new GameStarted(this));
-			Domains.RaiseRequest(new PlayerRollRequested(this, Players.Current));
+			Domains.RaiseRequest(new PlayerRollRequested(Players.Current));
 		}
 	}
 }

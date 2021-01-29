@@ -7,6 +7,6 @@ namespace Trivia.Domain.Events.Games
 		public Game Game { get; }
 
 		internal GameEnded(Game game)
-			=> (Game) = (game);
+			=> Game = game;
 	}
 }
